@@ -1,0 +1,19 @@
+.alert {
+    border: 5px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 10px gray;
+}
+
+.red {
+    color: white;
+    background-color: crimson;
+}
+
+.green {
+    color: white;
+    background-color: darkolivegreen;
+}
+
+h1 {
+    color: indigo;
+}
