@@ -9,10 +9,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       datetime: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      description: {
         type: Sequelize.STRING
       },
       location: {
+        allowNull: false,
         type: Sequelize.STRING
+      },
+      is_virtual: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
       },
       group_id: {
         type: Sequelize.INTEGER
