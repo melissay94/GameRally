@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       beforeCreate: (createdUser, options) => {
         if (createdUser && createdUser.password) {
           // Create hash
-          let hash = bcrypt.hasSync(createdUser.password, 10);
+          let hash = bcrypt.hashSync(createdUser.password, 10);
           // Store hash
           createdUser.password = hash;
         }
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   user.associate = function(models) {
-    models.user.belongsToMany(models.group, { through: usergroup });
+    models.user.belongsToMany(models.group, { through: "usergroups" });
   };
 
   user.prototype.validPassword = function(passwordTyped) {

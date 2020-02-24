@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   event.associate = function(models) {
     models.event.belongsTo(models.group);
-    models.event.belongsToMany(models.game, { through: "gameevent" });
+    models.event.belongsToMany(models.game, { through: "gameevents" });
   };
   return event;
 };

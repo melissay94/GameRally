@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   game.associate = function(models) {
-    models.game.belongsToMany(models.event, { through: "gameevent" });
-    models.game.belongsToMany(models.group, { through: "gamegroup" });
+    models.game.belongsToMany(models.event, { through: "gameevents" });
+    models.game.belongsToMany(models.group, { through: "gamegroups" });
   };
   return game;
 };

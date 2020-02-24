@@ -11,8 +11,9 @@ describe('Creating a User', function() {
   it('should create successfully', function(done) {
     db.user.create({
       email: 'test@test.co',
-      name: 'Brian',
-      password: 'password'
+      firstname: 'Jane',
+      lastname: 'Doe',
+      password: 'Pineapple1234'
     }).then(function() {
       done();
     }).catch(function(error) {
@@ -22,21 +23,10 @@ describe('Creating a User', function() {
 
   it('should throw an error on invalid email addresses', function(done) {
     db.user.create({
-      email: 'test',
-      name: 'Brian',
-      password: 'password'
-    }).then(function(newUser) {
-      done(newUser);
-    }).catch(function(error) {
-      done();
-    });
-  });
-
-  it('should throw an error on invalid name', function(done) {
-    db.user.create({
-      email: 'test@test.co',
-      name: '',
-      password: 'password'
+      email: 'notvalidemail',
+      firstname: 'Jane',
+      lastname: 'Doe',
+      password: 'Pineapple1234'
     }).then(function(newUser) {
       done(newUser);
     }).catch(function(error) {
@@ -47,7 +37,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid password', function(done) {
     db.user.create({
       email: 'test@test.co',
-      name: 'Brian',
+      firstname: 'Jane',
+      lastname: 'Doe',
       password: 'short'
     }).then(function(newUser) {
       done(newUser);
@@ -56,13 +47,55 @@ describe('Creating a User', function() {
     });
   });
 
+  it('should throw an error on invalid password', function(done) {
+    db.user.create({
+      email: 'test@test.co',
+      firstname: 'Jane',
+      lastname: 'Doe',
+      password: 'nocapspassword11'
+    }).then(function(newUser) {
+      done(newUser);
+    }).catch(function(error) {
+      done();
+    });
+  });
+
+  it('should throw an error on invalid password', function(done) {
+    db.user.create({
+      email: 'test@test.co',
+      firstname: 'Jane',
+      lastname: 'Doe',
+      password: 'NoNumbersPassword'
+    }).then(function(newUser) {
+      done(newUser);
+    }).catch(function(error) {
+      done();
+    });
+  }); 
+   
+  it('should throw an error on invalid password', function(done) {
+    db.user.create({
+      email: 'test@test.co',
+      firstname: 'Jane',
+      lastname: 'Doe',
+      password: 'NOLOWERCASEPASSWORD11'
+    }).then(function(newUser) {
+      done(newUser);
+    }).catch(function(error) {
+      done();
+    });
+  });
+
+  
+
   it('should hash the password before save', function(done) {
     db.user.create({
       email: 'test@test.co',
-      name: 'Brian',
-      password: 'password'
+      firstname: 'Jane',
+      lastname: 'Doe',
+      password: 'Pineapple1234'
     }).then(function(newUser) {
-      if (newUser.password === 'password') {
+      if (newUser.password === 'Pineapple1234') {
         done(newUser);
       } else {
         done();
@@ -77,7 +110,7 @@ describe('User instance methods', function() {
   describe('validPassword', function() {
     it('should validate a correct password', function(done) {
       db.user.findOne().then(function(user) {
-        if (user.validPassword('password')) {
+        if (user.validPassword('Pineapple1234')) {
           done();
         } else {
           done(user);
