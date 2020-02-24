@@ -2,21 +2,21 @@
   "development": {
     "username": "postgres",
     "password": "postgres",
-    "database": "express_auth_development",
+    "database": "gamerally_dev",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "postgres",
-    "database": "express_auth_development",
+    "database": "gamerally_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "postgres",
-    "database": "express_auth_production",
+    "database": "gamerally_prod",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
