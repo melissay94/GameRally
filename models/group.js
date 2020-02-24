@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     max_players: {
       type: DataTypes.INTEGER,
       validate: {
-        min: 1
+        min: {
+          args: [1],
+          msg: "Invalid number of players. Need at least 1."
+        }
       }
     }
   }, {});

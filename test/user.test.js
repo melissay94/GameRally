@@ -34,7 +34,59 @@ describe('Creating a User', function() {
     });
   });
 
-  it('should throw an error on invalid password', function(done) {
+  it('should throw an error on invalid short first name', function(done) {
+    db.user.create({
+      email: 'test@test.co',
+      firstname: '',
+      lastname: 'Doe',
+      password: 'Pineapple1234'
+    }).then(function(newUser) {
+      done(newUser);
+    }).catch(function(error) {
+      done();
+    });
+  });
+
+  it('should throw an error on invalid long first name', function(done) {
+    db.user.create({
+      email: 'test@test.co',
+      firstname: 'CHC6iNnbuEgGhX5fZuX7VjGppEbapR03ftVoiWOMS1agZHg9S1Xpm1085XKvTgRYr42BBS',
+      lastname: 'Doe',
+      password: 'Pineapple1234'
+    }).then(function(newUser) {
+      done(newUser);
+    }).catch(function(error) {
+      done();
+    });
+  });
+
+  it('should throw an error on invalid short last name', function(done) {
+    db.user.create({
+      email: 'test@test.co',
+      firstname: 'Jane',
+      lastname: '',
+      password: 'Pineapple1234'
+    }).then(function(newUser) {
+      done(newUser);
+    }).catch(function(error) {
+      done();
+    });
+  });
+
+  it('should throw an error on invalid long last name', function(done) {
+    db.user.create({
+      email: 'test@test.co',
+      firstname: 'Jane',
+      lastname: 'CHC6iNnbuEgGhX5fZuX7VjGppEbapR03ftVoiWOMS1agZHg9S1Xpm1085XKvTgRYr42BBS',
+      password: 'Pineapple1234'
+    }).then(function(newUser) {
+      done(newUser);
+    }).catch(function(error) {
+      done();
+    });
+  });
+
+  it('should throw an error on invalid short password', function(done) {
     db.user.create({
       email: 'test@test.co',
       firstname: 'Jane',
@@ -47,7 +99,20 @@ describe('Creating a User', function() {
     });
   });
 
-  it('should throw an error on invalid password', function(done) {
+  it('should throw an error on invalid long password', function(done) {
+    db.user.create({
+      email: 'test@test.co',
+      firstname: 'Jane',
+      lastname: 'Doe',
+      password: 'CHC6iNnbuEgGhX5fZuX7VjGppEbapR03ftVoiWOMS1agZHg9S1Xpm1085XKvTgRYr42BBSbNC04qQU3c8zOn4HwGCFmzzCiHOh2v'
+    }).then(function(newUser) {
+      done(newUser);
+    }).catch(function(error) {
+      done();
+    })
+  })  
+
+  it('should throw an error on invalid missing capital password', function(done) {
     db.user.create({
       email: 'test@test.co',
       firstname: 'Jane',
@@ -60,7 +125,7 @@ describe('Creating a User', function() {
     });
   });
 
-  it('should throw an error on invalid password', function(done) {
+  it('should throw an error on invalid missing number password', function(done) {
     db.user.create({
       email: 'test@test.co',
       firstname: 'Jane',
@@ -73,7 +138,7 @@ describe('Creating a User', function() {
     });
   }); 
    
-  it('should throw an error on invalid password', function(done) {
+  it('should throw an error on invalid missing lowercase password', function(done) {
     db.user.create({
       email: 'test@test.co',
       firstname: 'Jane',
