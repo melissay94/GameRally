@@ -212,3 +212,33 @@ describe('User instance methods', function() {
     });
   });
 });
+
+describe("Create new group by user", () => {
+  it("Should create a group added to user", done => {
+    db.user.findOrCreate({
+      where: {
+        email: "test@test.co"
+      },
+      defaults: {
+        firstname: 'Jane',
+        lastname: 'Doe',
+        password: 'Pineapple1234'
+      }
+    }).then(([user, created]) => {
+        db.group.findOrCreate({
+          where: { name: "Settlers All Day Every Day" },
+          defaults: { max_players: 3 }
+        }).then(([group, created]) => {
+            user.addGroup(group).then(group => {
+              done();
+            }).catch(err => {
+              done(err);
+            });
+        }).catch(err => {
+          done(err);
+        });
+    }).catch(err => {
+      done(err);
+    });
+  });
+});

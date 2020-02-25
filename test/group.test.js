@@ -58,3 +58,18 @@ describe("Creating a Group", () => {
     });
 });
 
+describe("Create new event by group", () => {
+    db.group.findOne().then(group => {
+        group.createEvent({
+            datetime: "2022-02-24 15:38:36.38-08",
+            description: "Test Description for an event",
+            location: "111 Main Street, Seatlle 98107 WA",
+            isVirtual: false,
+            group_id: group.id
+        }).then(() => {
+            done();
+        }).catch(err => {
+            done(err);
+        });
+    });
+});

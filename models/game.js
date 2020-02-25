@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     link: {
       type: DataTypes.STRING,
       validate: {
-        isUrl: {
-          args: true,
-          msg: "Invalid url format."
+        len: {
+          args: [1, 60],
+          msg: "Invalid length. Must be between 1 and 60 characters."
         }
       }
     }
