@@ -9,9 +9,8 @@ const helmet = require("helmet");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const db = require("./models");
-const authController =  require('./controllers/auth');
-const testController = require("./controllers/test");
 const loggedIn = require("./middleware/isLoggedIn");
+const authController = require("./controllers/auth");
 
 const app = express();
 
@@ -47,18 +46,14 @@ app.use((req, res, next) => {
 
 sessionStore.sync();
 
-app.get('/', function(req, res) {
-  console.log(`User is ${req.user ? req.user.name : "not logged in"}`);
+app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/profile', loggedIn, (req, res) => {
-  res.render('profile');
-});
+app.use("/", authController);
 
-app.use('/auth', authController);
-app.use("/", loggedIn, testController);
+const port = process.env.PORT || 3000;
 
-var server = app.listen(process.env.PORT || 3000);
+const server = app.listen(port, () => console.log(`I took a trip to the port ${port}`));
 
 module.exports = server;

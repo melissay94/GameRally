@@ -4,46 +4,35 @@ const db = require("../models");
 
 const router = express.Router();
 
-router.get('/signup', (req, res) => {
-  res.render('auth/signup');
-});
-
-// POST - Sign up new users
 router.post("/signup", (req, res) => {
   db.user.findOrCreate({
     where: {
-      email: req.body.email
+      email:req.body.email
     }, defaults: {
-      name: req.body.name,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
       password: req.body.password
     }
   }).then(([user, created]) => {
     if (created) {
-      console.log("User created");
       passport.authenticate("local", {
-        successRedirect: "/",
+        successRedirect: "/home",
         successFlash: "Thanks for signing up!"
       })(req, res);
     } else {
-      console.log("User already exists");
-      req.flash("error", "Email already exists");
-      res.redirect("/auth/signup");
+      req.flash("error", "Email is already in use");
+      res.redirect("/");
     }
   }).catch(err => {
-    console.log("Error occurred creating user", err);
-    req.flash("error", "Error occurred creating user");
-    res.redirect("/auth/signup");
+    req.flash("error", "Error occured creating user");
+    res.redirect("/");
   })
 });
 
-router.get('/login', (req, res) => {
-  res.render('auth/login');
-});
-
 router.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/auth/login",
-  successFlash: "Welcome!",
+  successRedirect: "/home",
+  failureRedirect: "/",
+  successFlash: "Welcome back",
   failureFlash: "Invalid username or password"
 }));
 
@@ -52,7 +41,5 @@ router.get("/logout", (req, res) => {
   req.flash("success", "You have been successfully logged out!");
   res.redirect("/");
 });
-
-
 
 module.exports = router;
