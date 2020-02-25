@@ -1,8 +1,13 @@
 const express = require('express');
 const passport = require("../config/ppConfig");
+const loggedIn = require("../middleware/isLoggedIn");
 const db = require("../models");
 
 const router = express.Router();
+
+router.get("/home", loggedIn, (req, res) => {
+  // Render logged in home page here
+});
 
 router.post("/signup", (req, res) => {
   db.user.findOrCreate({

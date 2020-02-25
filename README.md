@@ -45,11 +45,11 @@ Templated from [Express Authentication Project](https://github.com/melissay94/ex
 | PUT     | /group/:id/edit | Updates group information and redirects to `/group/:id` on success |
 | DELETE  | /group/:id | User leaves group, if user is last user in group, delete group, redirects to `/group` on success |
 | GET     | /group/:id/event/new | Renders page with form for adding a new event to group |
-| POST    | /group/:id/event/new | Creates a new event for the specific group |
-| GET     | /group/:id/event/:id | Renders page for specific event in specific group |
-| GET     | /group/:id/event/:id/edit | Renders page with form for updating event information |
-| PUT     | /group/:id/event/:id/edit | Updates event information and redirects to `/group/:id/event/:id` on success |
-| DELETE  | /group/:id/event/:id | Deletes event and redirects to `/group/:id` on success |
+| POST    | /event/new | Creates a new event for the specific group |
+| GET     | /event/:id | Renders page for specific event in specific group |
+| GET     | /event/:id/edit | Renders page with form for updating event information |
+| PUT     | /event/:id/edit | Updates event information and redirects to `/event/:id` on success |
+| DELETE  | /event/:id | Deletes event and redirects to `/group/:id` on success |
 | GET     | /profile   | Renders page with user information |
 | GET     | /profile/edit | Renders page with form to update user information |
 | PUT     | /profile/edit | Updates user information and redirects to `/profile` on success |

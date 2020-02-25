@@ -9,8 +9,10 @@ const helmet = require("helmet");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const db = require("./models");
-const loggedIn = require("./middleware/isLoggedIn");
 const authController = require("./controllers/auth");
+const groupController = require("./controllers/group");
+const eventController = require("./controllers/event");
+const profileController = require("./controllers/profile");
 
 const app = express();
 
@@ -51,6 +53,9 @@ app.get('/', (req, res) => {
 });
 
 app.use("/", authController);
+app.use("/group", groupController);
+app.use("/event", eventController);
+app.use("/profile", profileController);
 
 const port = process.env.PORT || 3000;
 
