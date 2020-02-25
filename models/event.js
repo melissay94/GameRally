@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const event = sequelize.define('event', {
-    datetime: {
+    dateTime: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
       validate: {
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     location: DataTypes.STRING,
     isVirtual: DataTypes.BOOLEAN,
-    group_id: DataTypes.INTEGER
+    groupId: DataTypes.INTEGER
   }, {});
   event.associate = function(models) {
     models.event.belongsTo(models.group);

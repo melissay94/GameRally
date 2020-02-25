@@ -16,7 +16,7 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      max_players: {
+      maxPlayers: {
         type: Sequelize.INTEGER
       },
       createdAt: {

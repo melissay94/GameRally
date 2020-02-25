@@ -14,6 +14,7 @@ router.delete("/", (req, res) => {
 
 router.get("/edit", (req, res) => {
     // Renders form for updating user information
+    res.send("edit profile");
 });
 
 router.put("/edit", (req, res) => {

@@ -11,8 +11,8 @@ describe('Creating a User', function() {
   it('should create successfully', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: 'Jane',
-      lastname: 'Doe',
+      firstName: 'Jane',
+      lastName: 'Doe',
       password: 'Pineapple1234'
     }).then(function() {
       done();
@@ -24,8 +24,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid email addresses', function(done) {
     db.user.create({
       email: 'notvalidemail',
-      firstname: 'Jane',
-      lastname: 'Doe',
+      firstName: 'Jane',
+      lastName: 'Doe',
       password: 'Pineapple1234'
     }).then(function(newUser) {
       done(newUser);
@@ -37,8 +37,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid short first name', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: '',
-      lastname: 'Doe',
+      firstName: '',
+      lastName: 'Doe',
       password: 'Pineapple1234'
     }).then(function(newUser) {
       done(newUser);
@@ -50,8 +50,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid long first name', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: 'CHC6iNnbuEgGhX5fZuX7VjGppEbapR03ftVoiWOMS1agZHg9S1Xpm1085XKvTgRYr42BBS',
-      lastname: 'Doe',
+      firstName: 'CHC6iNnbuEgGhX5fZuX7VjGppEbapR03ftVoiWOMS1agZHg9S1Xpm1085XKvTgRYr42BBS',
+      lastName: 'Doe',
       password: 'Pineapple1234'
     }).then(function(newUser) {
       done(newUser);
@@ -63,8 +63,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid short last name', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: 'Jane',
-      lastname: '',
+      firsName: 'Jane',
+      lastName: '',
       password: 'Pineapple1234'
     }).then(function(newUser) {
       done(newUser);
@@ -76,8 +76,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid long last name', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: 'Jane',
-      lastname: 'CHC6iNnbuEgGhX5fZuX7VjGppEbapR03ftVoiWOMS1agZHg9S1Xpm1085XKvTgRYr42BBS',
+      firstName: 'Jane',
+      lastName: 'CHC6iNnbuEgGhX5fZuX7VjGppEbapR03ftVoiWOMS1agZHg9S1Xpm1085XKvTgRYr42BBS',
       password: 'Pineapple1234'
     }).then(function(newUser) {
       done(newUser);
@@ -89,8 +89,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid short password', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: 'Jane',
-      lastname: 'Doe',
+      firstName: 'Jane',
+      lastName: 'Doe',
       password: 'short'
     }).then(function(newUser) {
       done(newUser);
@@ -102,8 +102,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid long password', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: 'Jane',
-      lastname: 'Doe',
+      firstName: 'Jane',
+      lastName: 'Doe',
       password: 'CHC6iNnbuEgGhX5fZuX7VjGppEbapR03ftVoiWOMS1agZHg9S1Xpm1085XKvTgRYr42BBSbNC04qQU3c8zOn4HwGCFmzzCiHOh2v'
     }).then(function(newUser) {
       done(newUser);
@@ -115,8 +115,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid missing capital password', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: 'Jane',
-      lastname: 'Doe',
+      firstName: 'Jane',
+      lastName: 'Doe',
       password: 'nocapspassword11'
     }).then(function(newUser) {
       done(newUser);
@@ -128,8 +128,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid missing number password', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: 'Jane',
-      lastname: 'Doe',
+      firstName: 'Jane',
+      lastName: 'Doe',
       password: 'NoNumbersPassword'
     }).then(function(newUser) {
       done(newUser);
@@ -141,8 +141,8 @@ describe('Creating a User', function() {
   it('should throw an error on invalid missing lowercase password', function(done) {
     db.user.create({
       email: 'test@test.co',
-      firstname: 'Jane',
-      lastname: 'Doe',
+      firstName: 'Jane',
+      lastName: 'Doe',
       password: 'NOLOWERCASEPASSWORD11'
     }).then(function(newUser) {
       done(newUser);

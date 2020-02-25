@@ -10,15 +10,40 @@ before(done => {
 
 describe("Create an Event", () => {
     it("should create successfully", done => {
+        db.group.findOrCreate({
+            where: {
+                id: 0
+            }, defaults: {
+                name: "Test Group",
+                description: "This is a test group.",
+                maxPlayers: 6
+            }
+        }).then(([group, created]) => {
+            db.event.create({
+                description: "Test Description for an event",
+                location: "111 Main Street, Seatlle 98107 WA",
+                isVirtual: false,
+                groupId: group.id
+            }).then(() => {
+                done();
+            }).catch(err => {
+                done(err);
+            });
+        }).catch(err => {
+            done(err);
+        });
+    });
+
+    it("should throw an error on groupId not existing", done => {
         db.event.create({
             description: "Test Description for an event",
             location: "111 Main Street, Seatlle 98107 WA",
             isVirtual: false,
-            group_id: 2
-        }).then(() => {
-            done();
+            groupId: 2
+        }).then(newEvent => {
+            done(newEvent);
         }).catch(err => {
-            done(err);
+            done();
         });
     });
 
@@ -28,9 +53,9 @@ describe("Create an Event", () => {
             description: "Test Description for an event",
             location: "111 Main Street, Seatlle 98107 WA",
             isVirtual: false,
-            group_id: 2
+            groupId: 2
         }).then(newEvent => {
-            done();
+            done(newEvent);
         }).catch(err => {
             done();
         });

@@ -22,8 +22,8 @@ describe('GET /profile', () => {
     .set('Content-Type', 'application/x-www-form-urlencoded')
     .send({
       email: 'my@user.co',
-      firstname: 'Brian',
-      lastname: 'Smith',
+      firstName: 'Brian',
+      lastName: 'Smith',
       password: 'Pineapple1234'
     })
     .expect(302)
@@ -33,6 +33,27 @@ describe('GET /profile', () => {
         done(error);
       } else {
         agent.get('/profile')
+        .expect(200, done);
+      }
+    });
+  });
+
+  it('should return a 200 response if logged in', done => {
+    agent.post('/signup')
+    .set('Content-Type', 'application/x-www-form-urlencoded')
+    .send({
+      email: 'my@user.co',
+      firstName: 'Brian',
+      lastName: 'Smith',
+      password: 'Pineapple1234'
+    })
+    .expect(302)
+    .expect('Location', '/home')
+    .end((error, res) => {
+      if (error) {
+        done(error);
+      } else {
+        agent.get('/profile/edit')
         .expect(200, done);
       }
     });

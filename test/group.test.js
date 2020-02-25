@@ -13,7 +13,7 @@ describe("Creating a Group", () => {
         db.group.create({
             name: "Test Group",
             description: "This is a test group.",
-            max_players: 6
+            maxPlayers: 6
         }).then(() => {
             done();
         }).catch(err => {
@@ -25,7 +25,7 @@ describe("Creating a Group", () => {
         db.group.create({
             name: "",
             description: "This is a test group.",
-            max_players: 6
+            maxPlayers: 6
         }).then(newGroup => {
             done(newGroup);
         }).catch(err => {
@@ -49,7 +49,7 @@ describe("Creating a Group", () => {
         db.group.create({
             name: "Test Group",
             description: "This is a test group.",
-            max_players: 0
+            maxPlayers: 0
         }).then(newGroup => {
             done(newGroup);
         }).catch(err => {
@@ -65,7 +65,7 @@ describe("Create new event by group", () => {
             description: "Test Description for an event",
             location: "111 Main Street, Seatlle 98107 WA",
             isVirtual: false,
-            group_id: group.id
+            groupId: group.id
         }).then(() => {
             done();
         }).catch(err => {

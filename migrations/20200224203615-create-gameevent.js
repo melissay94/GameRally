@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      game_id: {
+      gameId: {
         type: Sequelize.INTEGER
       },
-      event_id: {
+      eventId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

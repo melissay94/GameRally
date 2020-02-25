@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: DataTypes.STRING,
-    max_players: {
+    maxPlayers: {
       type: DataTypes.INTEGER,
       validate: {
         min: {

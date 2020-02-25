@@ -2,6 +2,7 @@ const expect = require('chai').expect;
 const request = require('supertest');
 const app = require('../index');
 const db = require('../models');
+var agent = request.agent(app);
 
 before(function(done) {
   db.sequelize.sync({ force: true }).then(function() {
@@ -16,8 +17,8 @@ describe('Auth Controller', function() {
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send({
         email: 'new@new.co',
-        firstname: 'Brian',
-        lastname: 'Smith',
+        firstName: 'Brian',
+        lastName: 'Smith',
         password: 'Pineapple1234'
       })
       .expect('Location', '/home')
@@ -29,8 +30,8 @@ describe('Auth Controller', function() {
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send({
         email: 'new',
-        firstname: 'Brian',
-        lastname: 'Smith',
+        firstName: 'Brian',
+        lastName: 'Smith',
         password: 'p'
       })
       .expect('Location', '/')
@@ -70,3 +71,26 @@ describe('Auth Controller', function() {
     });
   });
 });
+
+// describe("Home Page", () => {
+//   it('should return a 200 response if logged in', done => {
+//     agent.post('/signup')
+//     .set('Content-Type', 'application/x-www-form-urlencoded')
+//     .send({
+//       email: 'my@user.co',
+//       firstname: 'Brian',
+//       lastname: 'Smith',
+//       password: 'Pineapple1234'
+//     })
+//     .expect(302)
+//     .expect('Location', '/home')
+//     .end((error, res) => {
+//       if (error) {
+//         done(error);
+//       } else {
+//         agent.get('/home')
+//         .expect(200, done);
+//       }
+//     });
+//   });
+// });

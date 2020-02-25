@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      datetime: {
+      dateTime: {
         allowNull: false,
         type: Sequelize.DATE
       },
@@ -19,11 +19,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      is_virtual: {
+      isVirtual: {
         allowNull: false,
         type: Sequelize.BOOLEAN
       },
-      group_id: {
+      groupId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
