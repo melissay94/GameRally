@@ -31,4 +31,4 @@ router.put("/:id/edit", (req, res) => {
     // Update a specific group
 });
 
-moduele.exports = router;
+module.exports = router;

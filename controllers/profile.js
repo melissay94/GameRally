@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     // Renders profile page for user
+    res.send("profile")
 });
 
 router.delete("/", (req, res) => {

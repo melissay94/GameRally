@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get("/home", loggedIn, (req, res) => {
   // Render logged in home page here
+  res.send("home");
 });
 
 router.post("/signup", (req, res) => {
