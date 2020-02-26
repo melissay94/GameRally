@@ -20,6 +20,7 @@ describe("Create an Event", () => {
             }
         }).then(([group, created]) => {
             db.event.create({
+                datetime: "2022-02-24 15:38:36.38-08",
                 description: "Test Description for an event",
                 location: "111 Main Street, Seatlle 98107 WA",
                 isVirtual: false,
@@ -36,6 +37,7 @@ describe("Create an Event", () => {
 
     it("should throw an error on groupId not existing", done => {
         db.event.create({
+            datetime: "2022-02-24 15:38:36.38-08",
             description: "Test Description for an event",
             location: "111 Main Street, Seatlle 98107 WA",
             isVirtual: false,

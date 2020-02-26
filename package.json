@@ -22,6 +22,7 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcrypt": "^3.0.8",
     "connect-flash": "^0.1.1",
     "connect-session-sequelize": "^6.1.1",

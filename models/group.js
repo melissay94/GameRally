@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: DataTypes.STRING,
+    iconIdentifier: DataTypes.STRING,
     maxPlayers: {
       type: DataTypes.INTEGER,
       validate: {

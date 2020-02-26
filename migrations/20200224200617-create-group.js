@@ -16,6 +16,10 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      iconIdentifier: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       maxPlayers: {
         type: Sequelize.INTEGER
       },

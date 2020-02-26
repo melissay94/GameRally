@@ -13,27 +13,32 @@ router.get("/home", loggedIn, (req, res) => {
     user.getGroups().then(groups => {
       let eventArray = [];
       groups.forEach(group => {
-        group.getEvents().then(events => {
-          eventArray.push(...events);
-          if (eventArray.length < 1) {
-            req.flash("error", "You have no upcoming events");
-            res.send("home");
-          } else {
-            eventArray = eventArray.sort((a, b) => b.datetime - a.datetime);
-            res.send(eventArray);
-          }
-        }).catch(err => {
-            req.flash("error", `Could not get events ${err.message}`);
-            res.send(`Events error: ${err}`);
+        eventArray.push(group.getEvents());
+        // group.getEvents().then(events => {
+        //   eventArray.push(...events);
+        //   if (eventArray.length < 1) {
+        //     req.flash("error", "You have no upcoming events");
+        //     res.send("home");
+        //   } else {
+        //     eventArray = eventArray.sort((a, b) => b.datetime - a.datetime);
+        //     res.send(eventArray);
+        //   }
+        // }).catch(err => {
+        //     req.flash("error", `Could not get events ${err.message}`);
+        //     res.send(`Events error: ${err}`);
         });
+        Promise.all(eventArray).then(values => {
+          res.send(`Home ${values}`);
+        }).catch(err => {
+          res.send(`This is not the way ${err}`);
+        });
+      }).catch(err => {
+          req.flash("error", `Could not get groups ${err}`);
+          res.send(`Groups error: ${err}`);
       });
     }).catch(err => {
-        req.flash("error", `Could not get groups ${err.message}`);
-        res.send(`Groups error: ${err}`);
-    });
-  }).catch(err => {
-    req.flash("error", `Could not find user ${error.message}`);
-    res.send(`User error: ${err}`);
+      req.flash("error", `Could not find user ${err}`);
+      res.send(`User error: ${err}`);
   });
 });
 
