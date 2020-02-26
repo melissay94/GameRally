@@ -6,8 +6,9 @@ Templated from [Express Authentication Project](https://github.com/melissay94/ex
 
 #### Technology being used:
   * [Board Game Atlas API](https://www.boardgameatlas.com/api/docs)
+  * [DiceBear Avatars API](https://avatars.dicebear.com/)
   * JavaScript, HTML, CSS
-  * Materialize
+  * Bootstrap
   * EJS
   * Express
   * SQL

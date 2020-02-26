@@ -1,0 +1,17 @@
+<form method="POST" action="/group/new">
+    <div class="form-group">
+        <label for="groupName">Group Name</label>
+        <input type="text" class="form-control" id="groupName" aria-describedby="groupNameHelp" name="name"/>
+        <small id="groupNameHelp" class="form-text text-muted">Your Group Name has to be unique from other existing groups.</small>
+    </div>
+    <div class="form-group">
+        <label for="groupDescription">Group Description</label>
+        <textarea class="form-control" id="groupDescription" rows="5" name="description"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="groupMax">Max Players</label>
+        <input type="number" min="1" class="form-control" id="groupMax" name="maxPlayers" aria-describedby="groupMaxHelp"/>
+        <small id="groupMaxHelp" class="form-text text-muted">This will be how many people can join the group before it closes.</small>
+    </div>
+    <button type="submit" class="btn btn-dark">Create Group</button>
+</form>

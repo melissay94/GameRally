@@ -4,12 +4,13 @@ const db = require("../models");
 
 const router = express.Router();
 
-const dicebearsURL = "https://avatars.dicebear.com/v2/identicon/";
-
 router.get("/", (req, res) => {
     // Render group list
     db.group.findAll().then(groups => {
-        res.send(groups);
+        res.render("group/index", { groups: groups });
+        if (groups.length < 1) {
+            req.flash("error", "No groups found");
+        }
     }).catch(err => {
         req.flash("error", `Coudn't get groups`);
         res.send(err);
@@ -18,14 +19,14 @@ router.get("/", (req, res) => {
 
 router.get("/new", (req, res) => {
    // Render new group form 
-   res.send("Where my new group form will go");
+   res.render("group/new");
 });
 
 router.post("/new", (req, res) => {
     // Create new group if one doesn't already exist
     let avatarIdentifier = req.body.name.replace(/\s/g,'');
 
-    db.findOrCreate({
+    db.group.findOrCreate({
         where: {
             name: req.body.name
         }, defaults: {
@@ -35,12 +36,6 @@ router.post("/new", (req, res) => {
         }
     }).then(([group, created]) => {
         if (created) {
-            avatarIdentifier = dicebearsURL + avatarIdentifier;
-            axios.get(avatarIdentifier).then(apiResponse => {
-                continue;
-            }).catch(err => {
-                req.flash("error", "Could not generate group icon");
-            });
             db.user.findOne({
                 where: { id: req.user.id }
             }).then(user => {
@@ -70,18 +65,13 @@ router.get("/:id", (req, res) => {
         where: { id: req.params.id }
     }).then(group => {
         if (group) {
-            let groupIconURL = dicebearsURL + group.iconIdentifier;
-            axios.get(groupIconURL).then(imgResponse => {
-                res.send(`group: ${group}, ${imgResponse}`);
-            }).catch(err => {
-                req.flash("error", "Could not get group icon");
-            })
+            res.render("group/show", { group: group, img: imgResponse });
         } else {
             throw "Couldn't find group";
         }
     }).catch(err => {
-        req.flash("error", "Couldn't find group")
-        res.send(err);
+        req.flash("error", "Couldn't find group");
+        res.redirect("/group");
     });
 });
 
@@ -126,7 +116,7 @@ router.delete("/:id", (req, res) => {
 
 router.get("/:id/edit", (req, res) => {
     // Get the edit form for a specific group
-    res.send("Where my group edit form will go", req.params.id);
+    res.render("group/new");
 });
 
 router.put("/:id/edit", (req, res) => {

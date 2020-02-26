@@ -1,0 +1,15 @@
+<div class="group-list container-fluid">
+    <a class="btn btn-dark new-group" href="/group/new">New Group</a>
+    <% groups.forEach(group => { %>
+        <div class="row">
+            <div class="col-4">
+                <img src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
+            </div>
+            <div class="col-8">
+                <h3><%= group.name %></h3>
+                <p><%= group.description %></p>
+                <a class="btn btn-primary" href="/group/<%= group.id %>">See More</a>
+            </div>
+        </div>
+    <% }); %>
+</div>
