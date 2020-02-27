@@ -42,25 +42,51 @@ router.get("/games/:eventId", (req, res) => {
     db.event.findOne({
         where: { id: req.params.eventId }
     }).then(event => {
-        let games = [];
-        if (req.query.game) {
-            const gameQuery = `${gameAtlasURL}name=${(req.query.game).toLowerCase()}&client_id=${process.env.GAMEBOARD_ATLAS_API_KEY}`;
-            axios.get(gameQuery).then(apiResponse => {
-                games = apiResponse.data.games;
-                res.render("event/games", { games: games, eventId: event.id });
-            }).catch(err => {
-                req.flash("error", "Could not access Board Game Atlas");
-            });
-        } else {
-            res.render("event/games", { games: games, eventId: event.id });
-        }
+        db.group.findOne({
+            where: { id: event.groupId }
+        }).then(group => {
+            let games = [];
+            if (req.query.game) {
+                const gameQuery = `${gameAtlasURL}name=${(req.query.game).toLowerCase()}&client_id=${process.env.GAMEBOARD_ATLAS_API_KEY}`;
+                axios.get(gameQuery).then(apiResponse => {
+                    games = apiResponse.data.games;
+                    res.render("event/games", { games: games, event: event, group: group });
+                }).catch(err => {
+                    req.flash("error", "Could not access Board Game Atlas");
+                });
+            } else {
+                res.render("event/games", { games: games, event: event, group: group });
+            }
+        }).catch(err => {
+            req.flash("error", "Could not get group");
+        })
     }).catch(err => {
         req.flash("error", "Could not get event");
     });
 });
 
 router.post("/games/:eventId", (req, res) => {
-
+    db.game.findOrCreate({
+        where: { link: req.body.link }, 
+        defaults: { name: req.body.name }
+    }).then(([game, created]) => {
+        db.event.findOne({
+            where: { id: req.params.eventId }
+        }).then(event => {
+            event.addGame(game).then(eventgame => {
+                req.flash("success", `Added ${game.name} to ${event.name}`);
+                res.redirect(`/event/games/${event.id}`);
+            }).catch(err => {
+                req.flash("error", "Unable to add game to event");
+            });
+        }).catch(err => {
+            req.flash("error", "Could not find event");
+            res.end();
+        });
+    }).catch(err => {
+        req.flash("error", "Could not find or create game");
+        res.end();
+    });
 });
 
 router.get("/:id", (req, res) => {

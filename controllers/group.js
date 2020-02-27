@@ -68,8 +68,16 @@ router.get("/:id", (req, res) => {
             where: { id: req.user.id }
         }).then(user => {
             if (group) {
-                const isMember = (user.length >= 1);
-                res.render("group/show", { group: group, isMember: isMember });
+                if (user.length > 0) {
+                    group.getEvents().then(events => {
+                        res.render("group/show", { group: group, events: events, isMember: true });
+                    }).catch(err => {
+                        req.flash("error", "Could not get events");
+                        res.render("group/show", { group: group, events: [], isMember: true });
+                    });
+                } else {
+                    res.render("group/show", { group: group, events: [], isMember: false });
+                }
             } else {
                 throw "Couldn't find group";
             }
@@ -92,15 +100,15 @@ router.put("/:id", (req, res) => {
                 res.redirect(`/group/${group.id}`);
             }).catch(err => {
                 req.flash("error", `Could not add group to user.`);
-                res.send(err);
+                res.redirect(`/group/${group.id}`);
             });
         }).catch(err => {
             req.flash("error", "Could not find user");
-            res.send(err);
+            res.redirect(`/group/${group.id}`);
         });
     }).catch(err => {
         req.flash("error", "Could not find group");
-        res.send(err);
+        res.redirect(`/group/${group.id}`);
     });
 });
 
@@ -129,9 +137,20 @@ router.delete("/:id", (req, res) => {
                         id: req.params.id
                     }
                 }).then(numDeleted => {
-                    res.redirect("/group");
+                    db.event.destroy({
+                        where: {
+                            groupId: req.params.id
+                        }
+                    }).then(numDeleted => {
+                        req.flash("success", "The group has been deleted");
+                        res.redirect("/group");
+                    }).catch(err => {
+                        req.flash("error", "Associated group events were not deleted");
+                        res.redirect("/group");
+                    });
                 }).catch(err => {
                     req.flash("error", "Could not delete group");
+                    res.redirect("/group");
                 });
             }
         }).catch(err => {
