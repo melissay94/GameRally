@@ -1,0 +1,28 @@
+<form method="GET" action="/event/games/<%= eventId %>">
+    <div class="form-group">
+        <label for="game">Board Game Atlas Search</label>
+        <input type="search" class="form-control" placeholder="Search for Games" name="game"/>
+    </div>
+    <button type="submit" class="btn btn-dark">Search</button>
+</form>
+<div class="query-result">
+    <% games.forEach(game => {%> 
+        <div class="game-result well row">
+            <div class="col-2">
+                <img class="img-fluid" src="<%= game.thumb_url %>" alt="Image of <%= game.name %>" />
+            </div>
+            <div class="col-10">
+                <h3><%= game.name %></h3>
+                <small class="text-muted">Published by <%= game.primary_publisher %></small>
+                <p><%= game.description_preview %></p>
+                <div class="game-extra">
+                    <small>Players: <%= game.min_players %> - <%= game.max_players %></small>
+                    <small>Playtime: <%= game.min_playtime %> - <%= game.max_playtime %></small>
+                    <form method="POST" action="/event/games/<%= eventId %>">
+                        <button type="submit" class="btn btn-dark">Add Game</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+</div>

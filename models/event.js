@@ -8,6 +8,15 @@ module.exports = (sequelize, DataTypes) => {
         isAfter: DataTypes.NOW
       }
     },
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        max: {
+          args: [60],
+          msg: "Name cannot be more than 60 characters long"
+        }
+      }
+    },
     description: DataTypes.STRING,
     location: DataTypes.STRING,
     isVirtual: DataTypes.BOOLEAN,
