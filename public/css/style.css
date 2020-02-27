@@ -47,3 +47,12 @@
     justify-content: space-between;
     margin: 24px 0;
 }
+
+.breadcrumbs {
+    margin: 24px 0;
+}
+
+.breadcrumbs a {
+    display: inline;
+    padding: 12px 0;
+}

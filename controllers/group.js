@@ -146,7 +146,13 @@ router.delete("/:id", (req, res) => {
 
 router.get("/:id/edit", (req, res) => {
     // Get the edit form for a specific group
-    res.render("group/new");
+    db.group.findOne({
+        where: { id: req.params.id }
+    }).then(group => {
+        res.render("group/edit", { group: group });
+    }).catch(err => {
+        req.flash("error", "Unable to get group");
+    });
 });
 
 router.put("/:id/edit", (req, res) => {
