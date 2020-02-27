@@ -6,6 +6,7 @@ const session = require("express-session");
 const passport = require("./config/ppConfig");
 const flash = require("connect-flash");
 const helmet = require("helmet");
+const methodOverride = require("method-override");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const db = require("./models");
@@ -28,6 +29,7 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
+app.use(methodOverride("_method"));
 app.use(helmet());
 
 app.use(session({

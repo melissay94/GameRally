@@ -7,10 +7,10 @@ const router = express.Router();
 router.get("/", (req, res) => {
     // Render group list
     db.group.findAll().then(groups => {
-        res.render("group/index", { groups: groups });
         if (groups.length < 1) {
             req.flash("error", "No groups found");
         }
+        res.render("group/index", { groups: groups });
     }).catch(err => {
         req.flash("error", `Coudn't get groups`);
         res.send(err);
@@ -39,7 +39,7 @@ router.post("/new", (req, res) => {
             db.user.findOne({
                 where: { id: req.user.id }
             }).then(user => {
-                user.addGroup(group).then(group => {
+                user.addGroup(group).then(usergroup => {
                     res.redirect(`/group/${group.id}`);
                 }).catch(err => {
                     req.flash("error", `Could not add group to user.`);
@@ -64,14 +64,43 @@ router.get("/:id", (req, res) => {
     db.group.findOne({
         where: { id: req.params.id }
     }).then(group => {
-        if (group) {
-            res.render("group/show", { group: group });
-        } else {
-            throw "Couldn't find group";
-        }
+        group.getUsers({
+            where: { id: req.user.id }
+        }).then(user => {
+            if (group) {
+                const isMember = (user.length >= 1);
+                res.render("group/show", { group: group, isMember: isMember });
+            } else {
+                throw "Couldn't find group";
+            }
+        });
     }).catch(err => {
         req.flash("error", "Couldn't find group");
         res.redirect("/group");
+    });
+});
+
+// Add user to group
+router.put("/:id", (req, res) => {
+    db.group.findOne({
+        where: { id: req.params.id}
+    }).then(group => {
+        db.user.findOne({
+            where: { id: req.user.id }
+        }).then(user => {
+            user.addGroup(group).then(usergroup => {
+                res.redirect(`/group/${group.id}`);
+            }).catch(err => {
+                req.flash("error", `Could not add group to user.`);
+                res.send(err);
+            });
+        }).catch(err => {
+            req.flash("error", "Could not find user");
+            res.send(err);
+        });
+    }).catch(err => {
+        req.flash("error", "Could not find group");
+        res.send(err);
     });
 });
 
@@ -91,7 +120,8 @@ router.delete("/:id", (req, res) => {
                 if (!currentUser) {
                     res.send("Could not find current user");
                 } else {
-                    currentUser.removeGroups(group)
+                    currentUser.removeGroups(group);
+                    res.redirect("/group");
                 }
             } else {
                 db.group.destroy({

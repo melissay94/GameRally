@@ -5,6 +5,18 @@
         <div class="col-8">
             <h3><%= group.name %></h3>
             <p><%= group.description %></p>
+            <div class="group-buttons">
+                <% if (isMember) { %> 
+                    <a class="btn btn-dark" href="/group/<%= group.id %>/edit">Edit</a>
+                    <form method="POST" action="/group/<%= group.id %>/?_method=DELETE">
+                        <button type="submit" class="btn btn-dark">Leave</button>
+                    </form>
+                <% } else { %>
+                    <form action="/group/<%= group.id %>/?_method=PUT" method="POST">
+                        <button class="btn btn-dark" type="submit">Join</button>
+                    </form>
+                <% } %>
+            </div>
         </div>
     </div>
     <div class="row">
