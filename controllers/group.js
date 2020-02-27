@@ -65,7 +65,7 @@ router.get("/:id", (req, res) => {
         where: { id: req.params.id }
     }).then(group => {
         if (group) {
-            res.render("group/show", { group: group, img: imgResponse });
+            res.render("group/show", { group: group });
         } else {
             throw "Couldn't find group";
         }

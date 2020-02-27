@@ -1,14 +1,18 @@
 <div class="group-list container-fluid">
-    <a class="btn btn-dark new-group" href="/group/new">New Group</a>
+    <div class="subheader">
+        <h2>All Groups</h2>
+        <a class="btn btn-dark new-group" href="/group/new">New Group</a>
+    </div>
+    </div>
     <% groups.forEach(group => { %>
         <div class="row">
-            <div class="col-4">
-                <img src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
+            <div class="col-2">
+                <img class="img-fluid" src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
             </div>
-            <div class="col-8">
+            <div class="col-10">
                 <h3><%= group.name %></h3>
                 <p><%= group.description %></p>
-                <a class="btn btn-primary" href="/group/<%= group.id %>">See More</a>
+                <a class="btn btn-dark" href="/group/<%= group.id %>">See More</a>
             </div>
         </div>
     <% }); %>
