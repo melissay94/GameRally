@@ -1,7 +1,7 @@
 <div class="breadcrumbs">
     <a class="nav-link" href="/group">< Groups</a>
     <a class="nav-link" href="/group/<%= event.groupId %>">< <%= group.name %></a>
-    <a class="nav-link" href="/event/new/<%= group.id %>">< New Event</a>
+    <a class="nav-link" href="/event/<%= event.id %>">< <%= event.name || "Event" %></a>
 </div>
 <form method="GET" action="/event/games/<%= event.id %>">
     <div class="form-group">

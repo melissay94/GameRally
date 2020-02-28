@@ -124,13 +124,24 @@ router.delete("/:id", (req, res) => {
     db.event.findOne({
         where: { id: req.params.id }
     }).then(event => {
-        event.destroy().then(numDeleted => {
-            req.flash("success", `Event ${event.name} has been removed.`);
-            res.redirect(`/group/${event.groupId}`);
+        event.getGames().then(games => {
+            event.removeGames(games);
+            event.destroy().then(numDeleted => {
+                req.flash("success", `Event ${event.name} has been removed.`);
+                res.redirect(`/group/${event.groupId}`);
+            }).catch(err => {
+                req.flash("error", err.message);
+                res.redirect(`/group/${event.groupId}`);
+            });
         }).catch(err => {
-            req.flash("error", err.message);
-            res.redirect(`/group/${event.groupId}`);
-        })
+            event.destroy().then(numDeleted => {
+                req.flash("success", `Event ${event.name} has been removed.`);
+                res.redirect(`/group/${event.groupId}`);
+            }).catch(err => {
+                req.flash("error", err.message);
+                res.redirect(`/group/${event.groupId}`);
+            });
+        });
     }).catch(err => {
         req.flash("error", err.message);
         res.redirect("/group");
@@ -140,9 +151,10 @@ router.delete("/:id", (req, res) => {
 router.get("/:id/edit", (req, res) => {
     // Get update form for a specific event
     db.event.findOne({
-        where: { id: req.params.id }
+        where: { id: req.params.id }, 
+        include: 'group'
     }).then(event => {
-        res.render("event/edit", { event: event });
+        res.render("event/edit", { event: event, group: event.group });
     }).catch(err => {
         req.flash("error", err.message);
         res.redirect(`/event/${req.params.id}`);
@@ -151,6 +163,28 @@ router.get("/:id/edit", (req, res) => {
 
 router.put("/:id/edit", (req, res) => {
     // Updates a specific event
+    db.event.findOne({
+        where: { id: req.params.id }
+    }).then(event => {
+        event.update({
+            dateTime: req.body.dateTime || event.dateTime,
+            name: req.body.name || event.name,
+            description: req.body.description || event.description,
+            location: req.body.location || event.location,
+            isVirtual: req.body.isVirtual || event.isVirtual
+        }, {
+            where: { id: req.params.id }
+        }).then(event => {
+            req.flash("success", `${event.name} has been updated`);
+            res.redirect(`/event/${event.id}`);
+        }).catch(err => {
+            req.flash("error", err.message);
+            res.redirect(`/event/${event.id}`);
+        });
+    }).catch(err => {
+        req.flash("error", err.message);
+        res.redirect("/group");
+    });
 });
 
 module.exports = router;

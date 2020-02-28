@@ -6,7 +6,7 @@
     <h3><%= event.name %></h3>
     <h4><%= event.dateTime %></h4>
     <p><%= event.description %></p>
-    <% if (event.isVirtual) { %>
+    <% if (!event.isVirtual) { %>
         <h4>Will be located at <%= event.location %></h4>
     <% } %>
     <h3>Games to be played: </h3>
@@ -21,6 +21,7 @@
             </div>
         </div>
     <% }); %>
+    <a class="btn btn-dark" href="/event/games/<%= event.id %>">Find Games</a>
     <div class="event-controls">
         <a class="btn btn-dark" href="/event/<%= event.id %>/edit">Edit</a>
         <form method="POST" action="/event/<%= event.id %>/?_method=DELETE">

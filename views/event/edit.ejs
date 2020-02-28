@@ -1,0 +1,35 @@
+<div class="breadcrumbs">
+    <a class="nav-link" href="/group">< Groups</a>
+    <a class="nav-link" href="/group/<%= group.id %>">< <%= group.name %></a>
+    <a class="nav-link" href="/event/<%= event.id %>">< <%= event.name || "Event" %></a>
+</div>
+<form method="POST" action="/event/<%= event.id %>/edit/?_method=PUT">
+    <div class="form-group">
+        <label for="eventTime">Event Date and Time</label>
+        <input type="datetime-local" class="form-control" id="eventTime" name="dateTime" value="<%= event.dateTime %>"/>
+    </div>
+    <div class="form-group">
+        <label for="eventName">Event Name</label>
+        <input type="text" class="form-control" id="eventName" name="name" value="<%= event.name %>" />
+    </div>
+    <div class="form-group">
+        <label for="eventDescription">Event Description</label>
+        <input type="text" class="form-control" id="eventDescription" name="description" value="<%= event.description %>" />
+    </div>
+    <div class="form-group">
+        <label for="eventLocation">Event Location</label>
+        <input type="text" class="form-control" id="eventLocation" name="location" value="<%= event.location %>" />
+    </div>
+    <div class="form-group">
+        <label>Is this a Virtual Event?</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="isVirtual" id="yes" value="true"/>
+            <label class="form-check-label" for="yes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="isVirtual" id="no" value="false"/>
+            <label class="form-check-label" for="no">No</label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-dark">Update Event</button>
+</form>

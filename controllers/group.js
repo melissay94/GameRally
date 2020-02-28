@@ -177,13 +177,14 @@ router.put("/:id/edit", (req, res) => {
     db.group.findOne({
         where: { id: req.params.id }
     }).then(group => {
-        db.group.update({
+        group.update({
             name: req.body.name || group.name,
             description: req.body.description || group.description,
             maxPlayers: parseInt(req.body.maxPlayers) || group.maxPlayers
         }, { 
             where: { id: group.id }
         }).then(group => {
+            req.flash("success", `${group.name} has been updated`);
             res.redirect(`/group/${req.params.id}`);
         }).catch(err => {
             req.flash("error", err.message);
