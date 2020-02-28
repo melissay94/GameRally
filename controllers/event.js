@@ -43,28 +43,22 @@ router.post("/new/:groupId", (req, res) => {
 
 router.get("/games/:eventId", (req, res) => {
     db.event.findOne({
-        where: { id: req.params.eventId }
+        where: { id: req.params.eventId },
+        include: 'group'
     }).then(event => {
-        db.group.findOne({
-            where: { id: event.groupId }
-        }).then(group => {
-            let games = [];
-            if (req.query.game) {
-                const gameQuery = `${gameAtlasURL}name=${(req.query.game).toLowerCase()}&client_id=${process.env.GAMEBOARD_ATLAS_API_KEY}`;
-                axios.get(gameQuery).then(apiResponse => {
-                    games = apiResponse.data.games;
-                    res.render("event/games", { games: games, event: event, group: group });
-                }).catch(err => {
-                    req.flash("error", err.message);
-                    res.redirect(`/games/${req.params.eventId}`);
-                });
-            } else {
-                res.render("event/games", { games: games, event: event, group: group });
-            }
-        }).catch(err => {
-            req.flash("error", err.message);
-            res.redirect("/group");
-        })
+        let games = [];
+        if (req.query.game) {
+            const gameQuery = `${gameAtlasURL}name=${(req.query.game).toLowerCase()}&client_id=${process.env.GAMEBOARD_ATLAS_API_KEY}`;
+            axios.get(gameQuery).then(apiResponse => {
+                games = apiResponse.data.games;
+                res.render("event/games", { games: games, event: event, group: event.group });
+            }).catch(err => {
+                req.flash("error", err.message);
+                res.redirect(`/games/${req.params.eventId}`);
+            });
+        } else {
+            res.render("event/games", { games: games, event: event, group: event.group });
+        }
     }).catch(err => {
         req.flash("error", err.message)
         res.redirect("/group");
@@ -97,15 +91,62 @@ router.post("/games/:eventId", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-    // Get a specific event page
+    db.event.findOne({
+        where: { id: req.params.id },
+        include: 'group'
+    }).then(event => {
+        event.getGames().then(games => {
+            let gameIdArray = [];
+            games.forEach(game => gameIdArray.push(game.link));
+            if (gameIdArray.length >= 1) {
+                let gameQuery = `${gameAtlasURL}ids=${gameIdArray.join(",")}&client_id=${process.env.GAMEBOARD_ATLAS_API_KEY}`;
+                axios.get(gameQuery).then(apiResponse => {
+                    res.render("event/show", { event: event, games: apiResponse.data.games, group: event.group });
+                }).catch(err => {
+                    req.flash("error", err.message);
+                    res.redirect("event/show", { event: event, games: [], group: event.group });
+                });
+            } else {
+                res.render("event/show", { event: event, games: [], group: event.group });
+            }
+        }).catch(err => {
+            req.flash("error", err.message);
+            res.redirect("event/show", { event: event, games: [], group: event.group });
+        });
+    }).catch(err => {
+        req.flash("error", err.message);
+        res.redirect("/group");
+    });
 });
 
 router.delete("/:id", (req, res) => {
     // Delete a specific event page
+    db.event.findOne({
+        where: { id: req.params.id }
+    }).then(event => {
+        event.destroy().then(numDeleted => {
+            req.flash("success", `Event ${event.name} has been removed.`);
+            res.redirect(`/group/${event.groupId}`);
+        }).catch(err => {
+            req.flash("error", err.message);
+            res.redirect(`/group/${event.groupId}`);
+        })
+    }).catch(err => {
+        req.flash("error", err.message);
+        res.redirect("/group");
+    })
 })
 
 router.get("/:id/edit", (req, res) => {
     // Get update form for a specific event
+    db.event.findOne({
+        where: { id: req.params.id }
+    }).then(event => {
+        res.render("event/edit", { event: event });
+    }).catch(err => {
+        req.flash("error", err.message);
+        res.redirect(`/event/${req.params.id}`);
+    });
 });
 
 router.put("/:id/edit", (req, res) => {

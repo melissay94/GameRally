@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="breadcrumbs">
+        <a class="nav-link" href="/group">< Groups</a>
+        <a class="nav-link" href="/group/<%= event.groupId %>">< <%= group.name %></a>
+    </div>
+    <h3><%= event.name %></h3>
+    <h4><%= event.dateTime %></h4>
+    <p><%= event.description %></p>
+    <% if (event.isVirtual) { %>
+        <h4>Will be located at <%= event.location %></h4>
+    <% } %>
+    <h3>Games to be played: </h3>
+    <% games.forEach(game => { %>
+        <div>
+            <h3><%= game.name %></h3>
+            <small class="text-muted">Published by <%= game.primary_publisher %></small>
+            <p><%= game.description_preview %></p>
+            <div class="game-extra">
+                <small>Players: <%= game.min_players %> - <%= game.max_players %></small>
+                <small>Playtime: <%= game.min_playtime %> - <%= game.max_playtime %></small>
+            </div>
+        </div>
+    <% }); %>
+    <div class="event-controls">
+        <a class="btn btn-dark" href="/event/<%= event.id %>/edit">Edit</a>
+        <form method="POST" action="/event/<%= event.id %>/?_method=DELETE">
+            <button class="btn btn-dark" type="submit">Delete</button>
+        </form>
+    </div>
+</div>

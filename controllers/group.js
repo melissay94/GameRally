@@ -128,11 +128,12 @@ router.delete("/:id", (req, res) => {
                     res.redirect("/group");
                 }
             } else {
-                db.group.destroy({
+                group.destroy({
                     where: {
                         id: req.params.id
                     }
                 }).then(numDeleted => {
+                    users[0].removeGroups(group);
                     db.event.destroy({
                         where: {
                             groupId: req.params.id
@@ -141,7 +142,7 @@ router.delete("/:id", (req, res) => {
                         req.flash("success", "The group has been deleted");
                         res.redirect("/group");
                     }).catch(err => {
-                        req.flash("error", "Associated group events were not deleted");
+                        req.flash("error", err.message);
                         res.redirect("/group");
                     });
                 }).catch(err => {
