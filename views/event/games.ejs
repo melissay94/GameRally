@@ -3,7 +3,7 @@
     <a class="nav-link" href="/group/<%= event.groupId %>">< <%= group.name %></a>
     <a class="nav-link" href="/event/<%= event.id %>">< <%= event.name || "Event" %></a>
 </div>
-<form method="GET" action="/event/games/<%= event.id %>">
+<form method="GET" action="/games/<%= event.id %>">
     <div class="form-group">
         <label for="game">Board Game Atlas Search</label>
         <input type="search" class="form-control" placeholder="Search for Games" name="game"/>
@@ -23,7 +23,7 @@
                 <div class="game-extra">
                     <small>Players: <%= game.min_players %> - <%= game.max_players %></small>
                     <small>Playtime: <%= game.min_playtime %> - <%= game.max_playtime %></small>
-                    <form method="POST" action="/event/games/<%= event.id %>">
+                    <form method="POST" action="/games/<%= event.id %>">
                         <input type="text" hidden value="<%= game.id %>" name="link" />
                         <input type="text" hidden value="<%= game.name %>" name="name" />
                         <button type="submit" class="btn btn-dark">Add Game</button>

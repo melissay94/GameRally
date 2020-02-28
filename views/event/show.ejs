@@ -21,7 +21,7 @@
             </div>
         </div>
     <% }); %>
-    <a class="btn btn-dark" href="/event/games/<%= event.id %>">Find Games</a>
+    <a class="btn btn-dark" href="/games/<%= event.id %>">Find Games</a>
     <div class="event-controls">
         <a class="btn btn-dark" href="/event/<%= event.id %>/edit">Edit</a>
         <form method="POST" action="/event/<%= event.id %>/?_method=DELETE">

@@ -14,6 +14,7 @@ const loggedIn = require("./middleware/isLoggedIn");
 const authController = require("./controllers/auth");
 const groupController = require("./controllers/group");
 const eventController = require("./controllers/event");
+const gameController = require("./controllers/game");
 const profileController = require("./controllers/profile");
 
 const app = express();
@@ -59,6 +60,7 @@ app.get('/', (req, res) => {
 app.use("/", authController);
 app.use("/group", loggedIn, groupController);
 app.use("/event", loggedIn, eventController);
+app.use("/games", loggedIn, gameController);
 app.use("/profile", loggedIn, profileController);
 
 const port = process.env.PORT || 3000;
