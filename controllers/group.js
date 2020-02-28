@@ -7,18 +7,14 @@ const router = express.Router();
 router.get("/", (req, res) => {
     // Render group list
     db.group.findAll().then(groups => {
-        if (groups.length < 1) {
-            req.flash("error", "No groups found");
-        }
         res.render("group/index", { groups: groups });
     }).catch(err => {
         req.flash("error", `Coudn't get groups`);
-        res.send(err);
+        res.redirect("/home"); // Need a 404 page at some point
     });
 });
 
 router.get("/new", (req, res) => {
-   // Render new group form 
    res.render("group/new");
 });
 
@@ -42,20 +38,20 @@ router.post("/new", (req, res) => {
                 user.addGroup(group).then(usergroup => {
                     res.redirect(`/group/${group.id}`);
                 }).catch(err => {
-                    req.flash("error", `Could not add group to user.`);
-                    res.send(err);
+                    req.flash("error", `${err.message}`);
+                    res.redirect("/group/new");
                 });
             }).catch(err => {
-                req.flash("error", "Could not find user");
-                res.send(err);
+                req.flash("error", `${err.message}`);
+                res.redirect("/group/new");
             });
         } else {
             req.flash("error", "Group with that name already exists");
             res.redirect("/group/new");
         }
     }).catch(err => {
-        req.flash("error", "Was unable to create new group");
-        res.send(err);
+        req.flash("error", `${err.message}`);
+        res.redirect("/group/new");
     });
 });
 
@@ -72,7 +68,6 @@ router.get("/:id", (req, res) => {
                     group.getEvents().then(events => {
                         res.render("group/show", { group: group, events: events, isMember: true });
                     }).catch(err => {
-                        req.flash("error", "Could not get events");
                         res.render("group/show", { group: group, events: [], isMember: true });
                     });
                 } else {
@@ -83,7 +78,7 @@ router.get("/:id", (req, res) => {
             }
         });
     }).catch(err => {
-        req.flash("error", "Couldn't find group");
+        req.flash("error", err.message);
         res.redirect("/group");
     });
 });
@@ -126,7 +121,8 @@ router.delete("/:id", (req, res) => {
                     } 
                 });
                 if (!currentUser) {
-                    res.send("Could not find current user");
+                    req.flash("error", "No current user found");
+                    res.redirect("/");
                 } else {
                     currentUser.removeGroups(group);
                     res.redirect("/group");
@@ -149,17 +145,17 @@ router.delete("/:id", (req, res) => {
                         res.redirect("/group");
                     });
                 }).catch(err => {
-                    req.flash("error", "Could not delete group");
+                    req.flash("error", err.message);
                     res.redirect("/group");
                 });
             }
         }).catch(err => {
-            req.flash("error", "Could not find user to leave group");
-            res.send(err);
+            req.flash("error", err.message);
+            res.redirect("/");
         });
     }).catch(err => {
-        req.flash("error", "Could not find group");
-        res.send(err);
+        req.flash("error", err.message);
+        res.redirect("/home");
     });
 });
 
@@ -170,7 +166,8 @@ router.get("/:id/edit", (req, res) => {
     }).then(group => {
         res.render("group/edit", { group: group });
     }).catch(err => {
-        req.flash("error", "Unable to get group");
+        req.flash("error", err.message);
+        res.redirect("/group");
     });
 });
 
@@ -188,12 +185,12 @@ router.put("/:id/edit", (req, res) => {
         }).then(group => {
             res.redirect(`/group/${req.params.id}`);
         }).catch(err => {
-            req.flash("error", "Unable to update group");
-            res.send(err);
+            req.flash("error", err.message);
+            res.redirect(`/group/${req.params.id}`);
         });
     }).catch(err => {
         req.flash("error", "Unable to find group to update");
-        res.send(err);
+        res.redirect("/group");
     });
 });
 

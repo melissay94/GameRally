@@ -1,4 +1,7 @@
 <div class="group-list container-fluid">
+    <% if (groups.length < 1) { %> 
+        <div class="alert red">No groups were found</div>
+    <% } %>
     <div class="subheader">
         <h2>All Groups</h2>
         <a class="btn btn-dark new-group" href="/group/new">New Group</a>

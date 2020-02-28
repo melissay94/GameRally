@@ -42,14 +42,15 @@ app.use(session({
 app.use(passport.initialize()); // Has to be after the session use 
 app.use(passport.session());
 app.use(flash());
+
+sessionStore.sync();
+
 app.use((req, res, next) => {
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
 
   next();
 });
-
-sessionStore.sync();
 
 app.get('/', (req, res) => {
   res.render('index');

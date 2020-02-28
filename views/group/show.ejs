@@ -1,4 +1,7 @@
 <div class="container-fluid">
+    <% if (events.length < 1 && isMember) { %> 
+        <div class="alert red">No events were found</div>
+    <% } %>
     <a class="nav-link" href="/group">< Groups</a>
     <div class="group-info">
         <img src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />

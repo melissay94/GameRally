@@ -13,7 +13,8 @@ router.get("/new/:groupId", (req, res) => {
     }).then(group => {
         res.render("event/new", { groupId: req.params.groupId, group: group });
     }).catch(err => {
-        req.flash("error", "Could not find group")
+        req.flash("error", err.message);
+        res.redirect(`/group/${req.params.groupId}`);
     });
 });
 
@@ -31,10 +32,12 @@ router.post("/new/:groupId", (req, res) => {
         }).then(event => {
             res.redirect(`/event/games/${event.get().id}`);
         }).catch(err => {
-            req.flash("error", "Event could not be created");
+            req.flash("error", err.message);
+            res.redirect(`/event/new/${req.params.groupId}`);
         });
     }).catch(err => {
-        req.flash("error", "Could not get group");
+        req.flash("error", err.message);
+        res.redirect(`/group`);
     })
 });
 
@@ -52,16 +55,19 @@ router.get("/games/:eventId", (req, res) => {
                     games = apiResponse.data.games;
                     res.render("event/games", { games: games, event: event, group: group });
                 }).catch(err => {
-                    req.flash("error", "Could not access Board Game Atlas");
+                    req.flash("error", err.message);
+                    res.redirect(`/games/${req.params.eventId}`);
                 });
             } else {
                 res.render("event/games", { games: games, event: event, group: group });
             }
         }).catch(err => {
-            req.flash("error", "Could not get group");
+            req.flash("error", err.message);
+            res.redirect("/group");
         })
     }).catch(err => {
-        req.flash("error", "Could not get event");
+        req.flash("error", err.message)
+        res.redirect("/group");
     });
 });
 
@@ -77,15 +83,16 @@ router.post("/games/:eventId", (req, res) => {
                 req.flash("success", `Added ${game.name} to ${event.name}`);
                 res.redirect(`/event/games/${event.id}`);
             }).catch(err => {
-                req.flash("error", "Unable to add game to event");
+                req.flash("error", err.message);
+                res.redirect(`/games/${req.params.eventId}`);
             });
         }).catch(err => {
-            req.flash("error", "Could not find event");
-            res.end();
+            req.flash("error", err.message);
+            res.redirect("/group");
         });
     }).catch(err => {
-        req.flash("error", "Could not find or create game");
-        res.end();
+        req.flash("error", err.message);
+        res.redirect(`/event/${req.params.eventId}`);
     });
 });
 
