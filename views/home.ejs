@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <h3>Your Upcoming Events</h3>
+    <% if (events.length > 0) { %>   
+        <% events.forEach(event => { %>
+            <div class="event-result">
+                <h3><%= event.name %></h3>
+                <h6><%= event.dateTime %></h6>
+                <p><%= event.description %></p>
+                <a class="btn btn-dark" href="/event/<%= event.id %>">See More</a>
+            </div>
+        <% }); %>
+    <% } %>
+</div>
