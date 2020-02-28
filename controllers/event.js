@@ -52,7 +52,7 @@ router.get("/:id", (req, res) => {
             if (gameIdArray.length >= 1) {
                 let gameQuery = `${gameAtlasURL}ids=${gameIdArray.join(",")}&client_id=${process.env.GAMEBOARD_ATLAS_API_KEY}`;
                 axios.get(gameQuery).then(apiResponse => {
-                    res.render("event/show", { event: event, games: apiResponse.data.games, group: event.group });
+                    res.render("event/show", { event: event, games: apiResponse.data.games, group: event.group, dbIds: games });
                 }).catch(err => {
                     req.flash("error", err.message);
                     res.redirect("event/show", { event: event, games: [], group: event.group });

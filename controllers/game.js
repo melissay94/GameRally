@@ -56,4 +56,28 @@ router.post("/:eventId", (req, res) => {
     });
 });
 
+router.put("/:eventId", (req, res) => {
+    db.event.findOne({
+        where: { id: req.params.eventId }
+    }).then(event => {
+        event.getGames({
+            where: { id: req.body.id }
+        }).then(game => {
+            event.removeGames(game).then(numDeleted => {
+                req.flash("success", `${game[0].name} was removed from ${event.name}`);
+                res.redirect(`/event/${req.params.eventId}`);
+            }).catch(err => {
+                req.flash("error", err.message);
+                res.redirect(`/event/${req.params.eventId}`);
+            });
+        }).catch(err => {
+            req.flash("error", err.message);
+            res.redirect(`/event/${req.params.eventId}`);
+        });
+    }).catch(err => {
+        req.flash("error", err.message);
+        res.redirect(`/event/${req.params.eventId}`);
+    });
+});
+
 module.exports = router;
