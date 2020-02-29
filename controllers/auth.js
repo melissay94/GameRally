@@ -41,8 +41,8 @@ router.post("/signup", (req, res) => {
     where: {
       email:req.body.email
     }, defaults: {
-      firstname: req.body.firstName,
-      lastname: req.body.lastName,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       password: req.body.password
     }
   }).then(([user, created]) => {

@@ -1,6 +1,11 @@
 <div class="container-fluid">
     <h3><%= user.email %></h3>
-    <form method="POST" action="/profile/?_method=DELETE">
-        <button type="submit" class="btn btn-dark">Delete Account</button>
-    </form>
+    <h3><%= user.firstName %></h3>
+    <h3><%= user.lastName %></h3>
+    <div class="button-control">
+        <a href="/profile/edit" class="btn btn-dark">Edit Account</a>
+        <form method="POST" action="/profile/?_method=DELETE">
+            <button type="submit" class="btn btn-dark">Delete Account</button>
+        </form>
+    </div>
 </div>

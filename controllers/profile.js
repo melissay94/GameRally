@@ -59,12 +59,38 @@ router.delete("/", (req, res) => {
 
 router.get("/edit", (req, res) => {
     // Renders form for updating user information
-    res.send("edit profile");
+    db.user.findOne({
+        where: { id: req.user.id }
+    }).then (user => {
+        res.render("profile/edit", { user: user });
+    }).catch(err => {
+        req.flash("error", err.message);
+        res.redirect("/profile");
+    });
 });
 
 router.put("/edit", (req, res) => {
-    // Updates user infomration
-})
-
+    // Updates user infomration{
+    db.user.findOne({
+        where: { id: req.user.id }
+    }).then(user => {
+        user.update({
+            email: req.body.email || user.email,
+            firstName: req.body.firstName || user.firstName,
+            lastName: req.body.lastName || user.lastName,
+            password: user.password
+        }).then(user => {
+            req.flash("success", "Your account was successfully updated");
+            res.redirect("/profile");
+        }).catch(err => {
+            req.flash("error", err.message);
+            res.redirect("/profile/edit");
+        });
+    }).catch(err => {
+        req.flash("error", err.message);
+        req.logout();
+        res.redirect("/");
+    });
+});
 
 module.exports = router;
