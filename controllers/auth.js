@@ -5,7 +5,7 @@ const db = require("../models");
 
 const router = express.Router();
 
-  // Render logged in home page here
+// Render logged in home page here
 router.get("/home", loggedIn, (req, res) => {
   db.user.findOne({
     where: { id: req.user.id }
@@ -23,10 +23,8 @@ router.get("/home", loggedIn, (req, res) => {
           results = results.sort((a, b) => b.dateTime - a.dateTime);
           res.render("home", { events: results });
         }
-        res.send(`Home ${values}`);
       }).catch(err => {
-        req.flash("error", `This is not the way ${err}`);
-        res.redirect("home", { events: [] });
+        res.render("home", { events: [] });
       });
     }).catch(err => {
         req.flash("error", `Could not get groups ${err}`);

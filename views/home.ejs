@@ -1,6 +1,10 @@
 <div class="container-fluid">
     <h3>Your Upcoming Events</h3>
-    <% if (events.length > 0) { %>   
+    <% if (events.length < 1) { %>
+        <div class="alert red">
+            You have no upcoming events
+        </div>
+    <% } else { %>
         <% events.forEach(event => { %>
             <div class="event-result">
                 <h3><%= event.name %></h3>

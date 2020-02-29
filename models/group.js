@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   group.associate = function(models) {
     models.group.belongsToMany(models.user, { through: "usergroups" });
     models.group.belongsToMany(models.game, { through: "gamegroups" });
-    models.group.hasMany(models.event);
+    models.group.hasMany(models.event, { onDelete: "cascade", hooks: true });
   };
   return group;
 };
