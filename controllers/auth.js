@@ -27,12 +27,10 @@ router.get("/home", loggedIn, (req, res) => {
         res.render("home", { events: [] });
       });
     }).catch(err => {
-        req.flash("error", `Could not get groups ${err}`);
-        res.redirect("/");
+      res.status(400).render("404");
     });
   }).catch(err => {
-    req.flash("error", `Could not find user ${err}`);
-    res.redirect("/");
+    res.status(400).render("404");
   });
 });
 
@@ -56,8 +54,7 @@ router.post("/signup", (req, res) => {
       res.redirect("/");
     }
   }).catch(err => {
-    req.flash("error", "Error occured creating user");
-    res.redirect("/");
+    res.status(400).render("404");
   })
 });
 

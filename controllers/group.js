@@ -9,8 +9,7 @@ router.get("/", (req, res) => {
     db.group.findAll().then(groups => {
         res.render("group/index", { groups: groups });
     }).catch(err => {
-        req.flash("error", `Coudn't get groups`);
-        res.redirect("/home"); // Need a 404 page at some point
+        res.status(400).render("404");
     });
 });
 
@@ -50,8 +49,7 @@ router.post("/new", (req, res) => {
             res.redirect("/group/new");
         }
     }).catch(err => {
-        req.flash("error", `${err.message}`);
-        res.redirect("/group/new");
+        res.status(400).render("404");
     });
 });
 
@@ -78,8 +76,7 @@ router.get("/:id", (req, res) => {
             }
         });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect("/group");
+        res.status(400).render("404");
     });
 });
 
@@ -98,12 +95,10 @@ router.put("/:id", (req, res) => {
                 res.redirect(`/group/${group.id}`);
             });
         }).catch(err => {
-            req.flash("error", "Could not find user");
-            res.redirect(`/group/${group.id}`);
+            res.status(400).render("404");
         });
     }).catch(err => {
-        req.flash("error", "Could not find group");
-        res.redirect(`/group/${group.id}`);
+        res.status(400).render("404");
     });
 });
 
@@ -155,8 +150,7 @@ router.delete("/:id", (req, res) => {
             res.redirect("/");
         });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect("/home");
+        res.status(400).render("404");
     });
 });
 
@@ -167,8 +161,7 @@ router.get("/:id/edit", (req, res) => {
     }).then(group => {
         res.render("group/edit", { group: group });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect("/group");
+        res.status(400).render("404");
     });
 });
 
@@ -191,8 +184,7 @@ router.put("/:id/edit", (req, res) => {
             res.redirect(`/group/${req.params.id}`);
         });
     }).catch(err => {
-        req.flash("error", "Unable to find group to update");
-        res.redirect("/group");
+        res.status(400).render("404");
     });
 });
 

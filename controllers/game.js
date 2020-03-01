@@ -26,8 +26,7 @@ router.get("/:eventId", (req, res) => {
             res.render("event/games", { games: games, event: event, group: event.group });
         }
     }).catch(err => {
-        req.flash("error", err.message)
-        res.redirect("/group");
+        res.status(400).render("404");
     });
 });
 
@@ -47,8 +46,7 @@ router.post("/:eventId", (req, res) => {
                 res.redirect(`/games/${req.params.eventId}`);
             });
         }).catch(err => {
-            req.flash("error", err.message);
-            res.redirect("/group");
+            res.status(400).render("404");
         });
     }).catch(err => {
         req.flash("error", err.message);
@@ -75,8 +73,7 @@ router.put("/:eventId", (req, res) => {
             res.redirect(`/event/${req.params.eventId}`);
         });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect(`/event/${req.params.eventId}`);
+        res.status(400).render("404");
     });
 });
 

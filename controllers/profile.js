@@ -64,8 +64,7 @@ router.get("/edit", (req, res) => {
     }).then (user => {
         res.render("profile/edit", { user: user });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect("/profile");
+        res.status(400).render("404");
     });
 });
 

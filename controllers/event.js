@@ -13,8 +13,7 @@ router.get("/new/:groupId", (req, res) => {
     }).then(group => {
         res.render("event/new", { groupId: req.params.groupId, group: group });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect(`/group/${req.params.groupId}`);
+        res.status(400).render("404");
     });
 });
 
@@ -36,9 +35,8 @@ router.post("/new/:groupId", (req, res) => {
             res.redirect(`/event/new/${req.params.groupId}`);
         });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect(`/group`);
-    })
+        res.status(400).render("404");
+    });
 });
 
 router.get("/:id", (req, res) => {
@@ -65,8 +63,7 @@ router.get("/:id", (req, res) => {
             res.redirect("event/show", { event: event, games: [], group: event.group });
         });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect("/group");
+        res.status(400).render("404");
     });
 });
 
@@ -94,8 +91,7 @@ router.delete("/:id", (req, res) => {
             });
         });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect("/group");
+        res.status(400).render("404");
     })
 })
 
@@ -107,8 +103,7 @@ router.get("/:id/edit", (req, res) => {
     }).then(event => {
         res.render("event/edit", { event: event, group: event.group });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect(`/event/${req.params.id}`);
+        res.status(400).render("404");
     });
 });
 
@@ -133,8 +128,7 @@ router.put("/:id/edit", (req, res) => {
             res.redirect(`/event/${event.id}`);
         });
     }).catch(err => {
-        req.flash("error", err.message);
-        res.redirect("/group");
+        res.status(400).render("404");
     });
 });
 
