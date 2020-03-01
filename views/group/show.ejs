@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <a class="nav-link" href="/group">< Groups</a>
+    <a class="btn-link" href="/group">< Groups</a>
     <div class="group-info">
         <div class="col-2">
             <img src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
@@ -34,8 +34,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-3">
-            <h3 class="subheading h-size-2" style="margin-left: 15px">Games Played</h3>
+        <div class="col-3 group-games">
+            <h3 class="subheading h-size-2">Games Played</h3>
+            <% games.forEach(game => { %>
+                <h6><%= game.name %></h6>
+            <% }); %>
         </div>
         <div class="col-9">
             <div class="row">

@@ -64,12 +64,24 @@ router.get("/:id", (req, res) => {
             if (group) {
                 if (user.length > 0) {
                     group.getEvents().then(events => {
-                        res.render("group/show", { group: group, events: events, isMember: true });
+                        group.getGames().then(games => {
+                            res.render("group/show", { group: group, events: events, games: games, isMember: true });
+                        }).catch(err => {
+                            res.render("group/show", { group: group, events: events, games: [], isMember: true });
+                        });
                     }).catch(err => {
-                        res.render("group/show", { group: group, events: [], isMember: true });
+                        group.getGames().then(games => {
+                            res.render("group/show", { group: group, events: [], games: games, isMember: true });
+                        }).catch(err => {
+                            res.render("group/show", { group: group, events: [], games: [], isMember: true });
+                        });
                     });
                 } else {
-                    res.render("group/show", { group: group, events: [], isMember: false });
+                    group.getGames().then(games => {
+                        res.render("group/show", { group: group, events: [], games: games, isMember: true });
+                    }).catch(err => {
+                        res.render("group/show", { group: group, events: [], games: [], isMember: true });
+                    });
                 }
             } else {
                 throw "Couldn't find group";

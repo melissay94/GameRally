@@ -39,8 +39,20 @@ router.post("/:eventId", (req, res) => {
             where: { id: req.params.eventId }
         }).then(event => {
             event.addGame(game).then(eventgame => {
-                req.flash("success", `Added ${game.name} to ${event.name}`);
-                res.redirect(`/games/${event.id}`);
+                db.group.findOne({
+                    where: { id: event.groupId }
+                }).then(group => {
+                    group.addGame(game).then(groupgame => {
+                        req.flash("success", `Added ${game.name} to ${event.name}`);
+                        res.redirect(`/games/${event.id}`);
+                    }).catch(err => {
+                        req.flash("success", `Added ${game.name} to ${event.name}`);
+                        res.redirect(`/games/${event.id}`);
+                    });
+                }).catch(err => {
+                    req.flash("success", `Added ${game.name} to ${event.name}`);
+                    res.redirect(`/games/${event.id}`);
+                });
             }).catch(err => {
                 req.flash("error", err.message);
                 res.redirect(`/games/${req.params.eventId}`);

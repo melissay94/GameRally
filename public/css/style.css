@@ -160,6 +160,16 @@ p {
     font-weight: 700;
 }
 
+.game-header {
+    margin-top: 48px;
+    border-top: 2px solid #084C61;
+    padding-top: 12px;
+}
+
+.game-result {
+    margin-top: 12px;
+}
+
 .group-list .row {
     margin: 24px 0;
 }
@@ -168,6 +178,15 @@ p {
     display: flex;
     justify-content: space-between;
     margin: 24px 0;
+}
+
+.group-games h3 {
+    margin-left: 15px;
+}
+
+.group-games h6 {
+    margin-left: 15px;
+    font-weight: 700;
 }
 
 .breadcrumbs {
