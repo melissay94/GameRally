@@ -1,40 +1,64 @@
 <div class="container-fluid">
-    <% if (events.length < 1 && isMember) { %> 
-        <div class="alert red">No events were found</div>
-    <% } %>
     <a class="nav-link" href="/group">< Groups</a>
     <div class="group-info">
-        <img src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
-        <div class="col-8">
-            <h3><%= group.name %></h3>
-            <p><%= group.description %></p>
-            <div class="group-buttons">
+        <div class="col-2">
+            <img src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
+        </div>
+        <div class="col-1"></div>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="subheading h-size-1"><%= group.name %></h3>
+                </div>
                 <% if (isMember) { %> 
-                    <a class="btn btn-dark" href="/group/<%= group.id %>/edit">Edit</a>
-                    <form method="POST" action="/group/<%= group.id %>/?_method=DELETE">
-                        <button type="submit" class="btn btn-dark">Leave</button>
-                    </form>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
+                        <a class="btn btn-dark" href="/group/<%= group.id %>/edit">Edit</a>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
+                        <form method="POST" action="/group/<%= group.id %>/?_method=DELETE">
+                            <button type="submit" class="btn btn-dark">Leave</button>
+                        </form>
+                    </div>
                 <% } else { %>
-                    <form action="/group/<%= group.id %>/?_method=PUT" method="POST">
-                        <button class="btn btn-dark" type="submit">Join</button>
-                    </form>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-2">
+                        <form action="/group/<%= group.id %>/?_method=PUT" method="POST">
+                            <button class="btn btn-dark" type="submit">Join</button>
+                        </form>
+                    </div>
                 <% } %>
             </div>
+            <p><%= group.description %></p>
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
-            <h3>Games Played</h3>
+        <div class="col-3">
+            <h3 class="subheading h-size-2" style="margin-left: 15px">Games Played</h3>
         </div>
-        <div class="col-8">
-            <h3>Upcoming Events</h3>
-            <a href="/event/new/<%= group.id %>" class="btn btn-dark">New Event</a>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h3 class="subheading h-size-2">Upcoming Events</h3>
+                </div>           
+                <div class="col-sm-3">
+                    <a href="/event/new/<%= group.id %>" class="btn btn-dark">New Event</a>
+                </div>
+            </div>
+            <% if (events.length < 1 && isMember) { %> 
+                <div class="alert red">No upcoming events</div>
+            <% } %>
             <% events.forEach(event => { %>
                 <div class="event-result">
-                    <h3><%= event.name %></h3>
+                    <div class="row">
+                        <h3 class="col-10"><%= event.name %></h3>
+                        <div class="col-2">
+                            <a class="btn btn-dark" href="/event/<%= event.id %>">See More</a>
+                        </div>
+                    </div>
                     <h6><%= event.dateTime %></h6>
                     <p><%= event.description %></p>
-                    <a class="btn btn-dark" href="/event/<%= event.id %>">See More</a>
                 </div>
             <% }); %>
         </div>

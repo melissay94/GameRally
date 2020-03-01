@@ -1,21 +1,34 @@
-<div class="group-list container-fluid">
-    <div class="subheader">
-        <h2>All Groups</h2>
-        <a class="btn btn-dark new-group" href="/group/new">New Group</a>
+<div class="group-list">
+    <div class="row">
+        <div class="col-9">
+            <h3 class="subheading h-size-1">All Groups</h3>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-2">
+            <a class="btn btn-dark" href="/group/new">New Group</a>
+        </div>
     </div>
     <% if (groups.length < 1) { %> 
         <div class="alert">No groups were found</div>
     <% } %>
-    </div>
     <% groups.forEach(group => { %>
         <div class="row">
             <div class="col-2">
                 <img class="img-fluid" src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
             </div>
             <div class="col-10">
-                <h3><%= group.name %></h3>
-                <p><%= group.description %></p>
-                <a class="btn btn-dark" href="/group/<%= group.id %>">See More</a>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h3 class="subheading h-size-2"><%= group.name %></h3>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
+                        <a class="btn btn-dark" href="/group/<%= group.id %>">See More</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="col-sm-12"><%= group.description %></p>
+                </div>
             </div>
         </div>
     <% }); %>

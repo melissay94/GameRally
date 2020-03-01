@@ -12,7 +12,7 @@
   </head>
   <body>
       <nav class="navbar navbar-expand-md navbar-dark">
-        <a class="navbar-brand" href="/home">
+        <a class="navbar-brand" href="<%= currentUser ? '/home' : '/' %>">
           <img src="/img/GameRallyLogo.png" alt="Game Rally Logo" />
         </a>
         <% if (currentUser) { %>

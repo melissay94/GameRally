@@ -1,8 +1,32 @@
+body {
+    background-color: #fefefe;
+    color: #084C61;
+}
+
 nav {
     background-color: #4F6D7A;
     font-family: "Teko", sans-serif;
     font-size: 24px;
     margin-bottom: 24px;
+}
+
+p {
+    font-size: 18px;
+}
+
+.nav-item {
+    margin: 0 5%;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    font-size: 28px;
+    color: #e3b505;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    font-size: 28px;
+    color: #e3b505;
+    opacity: 0.5;
 }
 
 .main {
@@ -18,9 +42,14 @@ nav {
 }
 
 .btn-dark {
+    width: 100%;
     background-color: #4F6D7A;
     border-color: #4F6D7A;
-    color: #ededed;
+    color: #fefefe;
+}
+
+.form-group {
+    margin-top: 24px;
 }
 
 
@@ -43,7 +72,7 @@ nav {
 }
 
 .modal-title {
-    color: #ededed;
+    color: #fefefe;
     font-family: "Teko", sans-serif;
     font-size: 28px;
     font-weight: 700;
@@ -67,13 +96,20 @@ nav {
     border-width: 2px;
 }
 
+.form-check {
+    margin-left: 15px;
+}
+
+.form-check-input {
+    margin-top: 12px;
+}
 .navbar {
     padding-left: 10%;
     margin-bottom: 5%;
 }
 
 .navbar img {
-    height: 48px;
+    height: 32px;
     filter: drop-shadow(4px 4px 2px #084C61);
 }
 
@@ -84,13 +120,13 @@ nav {
 }
 
 .error {
-    color: white;
+    color: #fefefe;
     background-color: #DB504A;
 }
 
 .success {
-    color: white;
-    background-color: #4F6D7A;
+    color: #fefefe;
+    background-color: #56a3a6;
 }
 
 .group-list {
@@ -103,25 +139,25 @@ nav {
     font-family: "Teko", sans-serif;
     text-transform: uppercase;
     color: #DB504A;
-    font-size: 36px;
     font-weight: 700;
 }
 
-.subheader {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    margin: 24px 0;
+.h-size-1 {
+    font-size: 42px;
 }
 
-.subheader h2 {
-    margin: 0;
-    margin-top: 6px;
+.h-size-2 {
+    font-size: 36px;
 }
 
-.new-group {
-    width: 200px;
-    margin: 8px 0;
+.event-result {
+    margin-top: 12px;
+    padding: 4px;
+    border: 2px solid #084C61;
+}
+
+.event-result h3 {
+    font-weight: 700;
 }
 
 .group-list .row {

@@ -1,34 +1,48 @@
 <div class="breadcrumbs">
-    <a class="nav-link" href="/group">< Groups</a>
-    <a class="nav-link" href="/group/<%= groupId %>">< <%= group.name %></a>
+    <a class="a-link" href="/group">< Groups</a>
+    <a class="a-link" href="/group/<%= groupId %>">< <%= group.name %></a>
 </div>
+<h3 class="subheading h-size-1">New Event</h3>
 <form method="POST" action="/event/new/<%= groupId %>">
-    <div class="form-group">
-        <label for="eventTime">Event Date and Time</label>
-        <input type="datetime-local" class="form-control" id="eventTime" name="dateTime"/>
+    <div class="form-group row">
+        <label for="eventTime" class="form-label col-form-label col-2">Event Date and Time</label>
+        <div class="col-10">
+            <input type="datetime-local" class="form-control" id="eventTime" name="dateTime"/>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="eventName">Event Name</label>
-        <input type="text" class="form-control" id="eventName" name="name" />
+    <div class="form-group row">
+        <label for="eventName" class="form-label col-form-label col-2">Event Name</label>
+        <div class="col-10">
+            <input type="text" class="form-control" id="eventName" name="name" />
+        </div>
     </div>
-    <div class="form-group">
-        <label for="eventDescription">Event Description</label>
-        <input type="text" class="form-control" id="eventDescription" name="description" />
+    <div class="form-group row">
+        <label for="eventDescription" class="form-label col-form-label col-2">Event Description</label>
+        <div class="col-10">
+            <textarea type="text" class="form-control" id="eventDescription" name="description" rows="5"></textarea>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="eventLocation">Event Location</label>
-        <input type="text" class="form-control" id="eventLocation" name="location" />
+    <div class="form-group row">
+        <label for="eventLocation" class="form-label col-form-label col-2">Event Location</label>
+        <div class="col-10">
+            <input type="text" class="form-control" id="eventLocation" name="location" />
+        </div>
     </div>
-    <div class="form-group">
-        <label>Is this a Virtual Event?</label>
-        <div class="form-check form-check-inline">
+    <div class="form-group row">
+        <label for="isVirtual" class="form-label col-form-label col-2">Is it a Virtual Event?</label>
+        <div class="form-check col-1">
             <input class="form-check-input" type="radio" name="isVirtual" id="yes" value="true"/>
-            <label class="form-check-label" for="yes">Yes</label>
+            <label class="form-label form-check-label" for="yes">Yes</label>
         </div>
-        <div class="form-check form-check-inline">
+        <div class="form-check col-1">
             <input class="form-check-input" type="radio" name="isVirtual" id="no" value="false"/>
-            <label class="form-check-label" for="no">No</label>
+            <label class="form-label form-check-label" for="no">No</label>
         </div>
     </div>
-    <button type="submit" class="btn btn-dark">Create Event</button>
+    <div class="row">
+        <div class="col-10"></div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-dark">Create Event</button>
+        </div>
+    </div>
 </form>

@@ -46,8 +46,7 @@ router.post("/signup", (req, res) => {
   }).then(([user, created]) => {
     if (created) {
       passport.authenticate("local", {
-        successRedirect: "/home",
-        successFlash: "Thanks for signing up!"
+        successRedirect: "/home"
       })(req, res);
     } else {
       req.flash("error", "Email is already in use");
@@ -61,7 +60,6 @@ router.post("/signup", (req, res) => {
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/home",
   failureRedirect: "/",
-  successFlash: "Welcome back",
   failureFlash: "Invalid username or password"
 }));
 
