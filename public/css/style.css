@@ -9,6 +9,14 @@ nav {
     margin: 24px 10%;
 }
 
+.center {
+    text-align: center;
+}
+
+.center h3 {
+    margin: 24px;
+}
+
 .btn-dark {
     background-color: #4F6D7A;
     border-color: #4F6D7A;

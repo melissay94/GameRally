@@ -63,6 +63,11 @@ app.use("/event", loggedIn, eventController);
 app.use("/games", loggedIn, gameController);
 app.use("/profile", loggedIn, profileController);
 
+// Catch all for routes to serve 404 if page not found
+app.use((req, res, next) => {
+  res.status(404).render("404");
+})
+
 const port = process.env.PORT || 3000;
 
 const server = app.listen(port, () => console.log(`I took a trip to the port ${port}`));
