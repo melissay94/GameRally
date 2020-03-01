@@ -3,21 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Authentication</title>
+    <title>GameRally</title>
 
     <!-- Latest compiled and minified CSS & JS -->
+    <link href="https://fonts.googleapis.com/css?family=Teko&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="/home">GameRally</a>
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <a class="navbar-brand" href="/home">
+          <img src="/img/GameRallyLogo.png" alt="Game Rally Logo" />
+        </a>
+        <% if (currentUser) { %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="/group">Groups <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
@@ -28,8 +32,9 @@
             </li>
           </ul>
         </div>
+        <% } %>
       </nav>
-    <div class="container">
+    <div class="main">
       <% include partials/alerts %>
       <%- body %>
     </div>

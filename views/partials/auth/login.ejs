@@ -1,13 +1,33 @@
-<form action="/login" method="POST">
-  <div class="form-group">
-    <label for="authEmail">Email</label>
-    <input id="authEmail" class="form-control" type="email" name="email">
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login to GameRally</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/login" method="POST">
+          <div class="form-group row">
+            <label for="authEmail" class="col-sm-3 col-form-label form-label">Email</label>
+            <div class="col-sm-9">
+              <input id="authEmail" class="form-control" type="email" name="email">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="authPassword" class="col-sm-3 col-form-label form-label">Password</label>
+            <div class="col-sm-9">
+              <input id="authPassword" class="form-control" type="password" name="password">
+            </div>
+          </div>
+          <div class="form-group row modal-button">
+            <div class="col-sm-9"></div>
+            <input class="btn btn-dark col-sm-3" type="submit" value="Login">
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="form-group">
-    <label for="authPassword">Password</label>
-    <input id="authPassword" class="form-control" type="password" name="password">
-  </div>
-
-  <input class="btn btn-primary" type="submit">
-</form>

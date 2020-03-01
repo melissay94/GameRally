@@ -1,24 +1,102 @@
+nav {
+    background-color: #4F6D7A;
+    font-family: "Teko", sans-serif;
+    font-size: 24px;
+    margin-bottom: 24px;
+}
+
+.main {
+    margin: 24px 10%;
+}
+
+.btn-dark {
+    background-color: #4F6D7A;
+    border-color: #4F6D7A;
+    color: #ededed;
+}
+
+
+.btn-dark:hover, .btn-dark:active, .btn-dark:focus {
+    background-color: #084C61;
+    border-color: #084C61;
+}
+
+.btn-link {
+    text-align: start;
+    color: #56A3A6;
+}
+
+.btn-link:hover, .btn-link:active, .btn-link:focus {
+    color: #4F6D7A;
+}
+
+.modal-header {
+    background-color: #4F6D7A;
+}
+
+.modal-title {
+    color: #ededed;
+    font-family: "Teko", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.modal-button {
+    margin: 0rem;
+}
+
+.form-label {
+    text-transform: uppercase;
+    color: #DB504A;
+    font-family: "Teko", sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    padding-top: 0px;
+}
+
+.form-control {
+    border-color: #4F6D7A;
+    border-width: 2px;
+}
+
+.navbar {
+    padding-left: 10%;
+    margin-bottom: 5%;
+}
+
+.navbar img {
+    height: 48px;
+    filter: drop-shadow(4px 4px 2px #084C61);
+}
+
 .alert {
     margin-top: 24px;
-    border: 5px solid black;
+    border: 5px solid #084C61;
     border-radius: 10px;
-    box-shadow: 5px 10px gray;
 }
 
-.red {
+.error {
     color: white;
-    background-color: crimson;
+    background-color: #DB504A;
 }
 
-.green {
+.success {
     color: white;
-    background-color: darkolivegreen;
+    background-color: #4F6D7A;
 }
 
 .group-list {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
+}
+
+.subheading {
+    font-family: "Teko", sans-serif;
+    text-transform: uppercase;
+    color: #DB504A;
+    font-size: 36px;
+    font-weight: 700;
 }
 
 .subheader {

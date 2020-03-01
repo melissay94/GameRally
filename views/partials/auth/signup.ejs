@@ -1,23 +1,43 @@
 <form action="/signup" method="POST">
-  <div class="form-group">
-    <label for="authEmail">Email</label>
-    <input id="authEmail" class="form-control" type="email" name="email">
+  <div class="form-group row">
+    <label for="authEmail" class="form-label col-form-label col-sm-3">Email</label>
+    <div class="col-sm-9">
+      <input id="authEmail" class="form-control" type="email" name="email">
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="firstName">First Name</label>
-    <input id="firstName" class="form-control" type="text" name="firstName">
+  <div class="form-group row">
+    <label for="firstName" class="form-label col-form-label col-sm-3">First Name</label>
+    <div class="col-sm-9">
+      <input id="firstName" class="form-control" type="text" name="firstName">
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="lastName">Last Name</label>
-    <input id="lastName" class="form-control" type="text" name="lastName">
+  <div class="form-group row">
+    <label for="lastName" class="form-label col-form-label col-sm-3">Last Name</label>
+    <div class="col-sm-9">
+      <input id="lastName" class="form-control" type="text" name="lastName">
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="authPassword">Password</label>
-    <input id="authPassword" class="form-control" type="password" name="password">
+  <div class="form-group row">
+    <label for="authPassword" class="form-label col-form-label col-sm-3">Password</label>
+    <div class="col-sm-9">
+      <input id="authPassword" class="form-control" type="password" name="password">
+    </div>
   </div>
 
-  <input class="btn btn-primary" type="submit">
+  <div class="form-group row">
+    <label for="confirmPassword" class="form-label col-form-label col-sm-3">Confirm</label>
+    <div class="col-sm-9">
+      <input id="confirmPassword" class="form-control" type="password" name="confirm">
+    </div>
+  </div>
+  <div class="form-group row modal-button">
+    <div class="col-sm-3"></div>
+    <button type="button" class="btn btn-link col-sm-6" data-toggle="modal" data-target="#loginModal">
+        Already registered? Login.
+      </button>
+    <input class="btn btn-dark col-sm-3" type="submit">
+  </div>
 </form>
