@@ -56,8 +56,12 @@ router.post("/new", (req, res) => {
 router.get("/:id", (req, res) => {
     // Get a specific group
     db.group.findOne({
-        where: { id: req.params.id }
+        where: { id: req.params.id },
+        include: [{
+            model: db.user
+        }]
     }).then(group => {
+        const currentUserCount = group.users.length;
         group.getUsers({
             where: { id: req.user.id }
         }).then(user => {
@@ -78,9 +82,9 @@ router.get("/:id", (req, res) => {
                     });
                 } else {
                     group.getGames().then(games => {
-                        res.render("group/show", { group: group, events: [], games: games, isMember: true });
+                        res.render("group/show", { group: group, events: [], games: games, isMember: false, isFull: currentUserCount <= group.maxPlayers });
                     }).catch(err => {
-                        res.render("group/show", { group: group, events: [], games: [], isMember: true });
+                        res.render("group/show", { group: group, events: [], games: [], isMember: false, isFull: currentUserCount <= group.maxPlayers });
                     });
                 }
             } else {
@@ -180,21 +184,29 @@ router.get("/:id/edit", (req, res) => {
 router.put("/:id/edit", (req, res) => {
     // Update a specific group
     db.group.findOne({
-        where: { id: req.params.id }
+        where: { id: req.params.id },
+        include: [{
+            model: db.user
+        }]
     }).then(group => {
-        group.update({
-            name: req.body.name || group.name,
-            description: req.body.description || group.description,
-            maxPlayers: parseInt(req.body.maxPlayers) || group.maxPlayers
-        }, { 
-            where: { id: group.id }
-        }).then(group => {
-            req.flash("success", `${group.name} has been updated`);
-            res.redirect(`/group/${req.params.id}`);
-        }).catch(err => {
-            req.flash("error", err.message);
-            res.redirect(`/group/${req.params.id}`);
-        });
+        if (req.body.maxPlayers >= group.users.length) {
+            group.update({
+                name: req.body.name || group.name,
+                description: req.body.description || group.description,
+                maxPlayers: parseInt(req.body.maxPlayers) || group.maxPlayers
+            }, { 
+                where: { id: group.id }
+            }).then(group => {
+                req.flash("success", `${group.name} has been updated`);
+                res.redirect(`/group/${req.params.id}`);
+            }).catch(err => {
+                req.flash("error", err.message);
+                res.redirect(`/group/${req.params.id}`);
+            });
+        } else {
+            req.flash("error", "Cannot make group smaller than the current number of people in it.");
+            res.redirect(`/group/${group.id}/edit`);
+        }
     }).catch(err => {
         res.status(400).render("404");
     });
