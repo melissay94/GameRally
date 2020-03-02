@@ -47,10 +47,17 @@
             <div class="row">
                 <div class="col-sm-9">
                     <h3 class="subheading h-size-2">Upcoming Events</h3>
-                </div>           
-                <div class="col-sm-3">
-                    <a href="/event/new/<%= group.id %>" class="btn btn-dark">New Event</a>
                 </div>
+                <% if (isMember) { %> 
+                <div class="col-sm-3">
+                        <a href="/event/new/<%= group.id %>" class="btn btn-dark">New Event</a>
+                </div>
+                <% } else { %> 
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
+                        <h3 class="subheading h-size-2">Locked</h3>
+                    </div>
+                <% } %>
             </div>
             <% if (events.length < 1 && isMember) { %> 
                 <div class="alert red">No upcoming events</div>
