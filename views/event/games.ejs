@@ -1,33 +1,45 @@
-<div class="breadcrumbs">
-    <a class="nav-link" href="/group">< Groups</a>
-    <a class="nav-link" href="/group/<%= event.groupId %>">< <%= group.name %></a>
-    <a class="nav-link" href="/event/<%= event.id %>">< <%= event.name || "Event" %></a>
+<div class="breadcrumbs row">
+    <div class="col-10">
+        <a class="btn-link" href="/group">< Groups</a>
+        <a class="btn-link" href="/group/<%= event.groupId %>">< <%= group.name %></a>
+        <a class="btn-link" href="/event/<%= event.id %>">< <%= event.name || "Event" %></a>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-dark" href="/group/<%= event.groupId %>">Finish</a>
+    </div>
 </div>
 <form method="GET" action="/games/<%= event.id %>">
-    <div class="form-group">
-        <label for="game">Board Game Atlas Search</label>
-        <input type="search" class="form-control" placeholder="Search for Games" name="game"/>
+    <div class="form-group row">
+        <label for="game" class="form-label col-form-label col-2">Board Game Atlas Search</label>
+        <div class="col-8">
+            <input type="search" class="form-control" placeholder="Search for Games" name="game"/>
+        </div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-dark">Search</button>
+        </div>
     </div>
-    <button type="submit" class="btn btn-dark">Search</button>
 </form>
 <div class="query-result">
     <% games.forEach(game => {%> 
-        <div class="game-result well row">
+        <div class="game-result row">
             <div class="col-2">
                 <img class="img-fluid" src="<%= game.thumb_url %>" alt="Image of <%= game.name %>" />
             </div>
             <div class="col-10">
-                <h3><%= game.name %></h3>
+                <h3 class="subheading h-size-2"><%= game.name %></h3>
                 <small class="text-muted">Published by <%= game.primary_publisher %></small>
                 <p><%= game.description_preview %></p>
-                <div class="game-extra">
-                    <small>Players: <%= game.min_players %> - <%= game.max_players %></small>
-                    <small>Playtime: <%= game.min_playtime %> - <%= game.max_playtime %></small>
-                    <form method="POST" action="/games/<%= event.id %>">
-                        <input type="text" hidden value="<%= game.id %>" name="link" />
-                        <input type="text" hidden value="<%= game.name %>" name="name" />
-                        <button type="submit" class="btn btn-dark">Add Game</button>
-                    </form>
+                <div class="row">
+                    <h6 class="col-2">Players: <%= game.min_players %> - <%= game.max_players %></h6>
+                    <h6 class="col-2">Playtime: <%= game.min_playtime %> - <%= game.max_playtime %></h6>
+                    <div class="col-6"></div>
+                    <div class="col-2">
+                        <form method="POST" action="/games/<%= event.id %>">
+                            <input type="text" hidden value="<%= game.id %>" name="link" />
+                            <input type="text" hidden value="<%= game.name %>" name="name" />
+                            <button type="submit" class="btn btn-dark">Add Game</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

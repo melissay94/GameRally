@@ -1,12 +1,17 @@
 <div class="container-fluid">
-    <h3 class="subheading">Your Profile</h3>
-    <h3><%= user.email %></h3>
-    <h3><%= user.firstName %></h3>
-    <h3><%= user.lastName %></h3>
-    <div class="button-control">
-        <a href="/profile/edit" class="btn btn-dark">Edit Account</a>
-        <form method="POST" action="/profile/?_method=DELETE">
-            <button type="submit" class="btn btn-dark">Delete Account</button>
-        </form>
+    <div class="row">
+        <h3 class="subheading col-6">Your Profile</h3>
+        <div class="col-1"></div>
+        <div class="col-2">
+            <a href="/profile/edit" class="btn btn-dark">Edit Account</a>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-2">
+            <form method="POST" action="/profile/?_method=DELETE">
+                <button type="submit" class="btn btn-dark">Delete Account</button>
+            </form>
+        </div>
     </div>
+    <h3><%= user.email %></h3>
+    <h3><%= user.firstName %> <%= user.lastName %></h3>
 </div>

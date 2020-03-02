@@ -1,6 +1,8 @@
 body {
     background-color: #fefefe;
     color: #084C61;
+    font-size: 18px;
+
 }
 
 nav {
@@ -11,7 +13,7 @@ nav {
 }
 
 p {
-    font-size: 18px;
+    font-size: 1rem;
 }
 
 .nav-item {
@@ -19,13 +21,11 @@ p {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    font-size: 28px;
+    font-size: 1.6rem;
     color: #e3b505;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
-    font-size: 28px;
-    color: #e3b505;
     opacity: 0.5;
 }
 
@@ -48,11 +48,6 @@ p {
     color: #fefefe;
 }
 
-.form-group {
-    margin-top: 24px;
-}
-
-
 .btn-dark:hover, .btn-dark:active, .btn-dark:focus {
     background-color: #084C61;
     border-color: #084C61;
@@ -67,6 +62,10 @@ p {
     color: #4F6D7A;
 }
 
+.form-group {
+    margin-top: 24px;
+}
+
 .modal-header {
     background-color: #4F6D7A;
 }
@@ -74,7 +73,7 @@ p {
 .modal-title {
     color: #fefefe;
     font-family: "Teko", sans-serif;
-    font-size: 28px;
+    font-size: 1.6rem;
     font-weight: 700;
 }
 
@@ -87,7 +86,7 @@ p {
     color: #DB504A;
     font-family: "Teko", sans-serif;
     font-weight: 700;
-    font-size: 28px;
+    font-size: 1.6rem;
     padding-top: 0px;
 }
 
@@ -143,11 +142,11 @@ p {
 }
 
 .h-size-1 {
-    font-size: 42px;
+    font-size: 2.4rem;
 }
 
 .h-size-2 {
-    font-size: 36px;
+    font-size: 2rem;
 }
 
 .event-result {
@@ -164,6 +163,10 @@ p {
     margin-top: 48px;
     border-top: 2px solid #084C61;
     padding-top: 12px;
+}
+
+.query-result {
+    margin-top: 5%;
 }
 
 .game-result {
@@ -190,10 +193,10 @@ p {
 }
 
 .breadcrumbs {
-    margin: 24px 0;
+    margin: 48px -15px;
 }
 
-.breadcrumbs a {
+.breadcrumbs .btn-link {
     display: inline;
     padding: 12px 0;
 }
