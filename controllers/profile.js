@@ -6,9 +6,12 @@ const router = express.Router();
 router.get("/", (req, res) => {
     // Renders profile page for user
     db.user.findOne({
-        where: { id: req.user.id }
+        where: { id: req.user.id }, 
+        include: [{
+            model: db.group
+        }]
     }).then(user => {
-        res.render("profile/index", { user: user });
+        res.render("profile/index", { user: user, groups: user.groups });
     }).catch(err => {
         req.logout();
         req.flash("error", err.message);

@@ -152,7 +152,6 @@ p {
 .event-result {
     margin-top: 12px;
     padding: 4px;
-    border: 2px solid #084C61;
 }
 
 .event-result h3 {
@@ -161,7 +160,6 @@ p {
 
 .game-header {
     margin-top: 48px;
-    border-top: 2px solid #084C61;
     padding-top: 12px;
 }
 
@@ -190,6 +188,10 @@ p {
 .group-games h6 {
     margin-left: 15px;
     font-weight: 700;
+}
+
+.group-result {
+    margin-top: 48px;
 }
 
 .breadcrumbs {

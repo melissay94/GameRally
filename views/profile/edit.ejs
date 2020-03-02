@@ -1,20 +1,32 @@
 <div class="container-fluid">
-    <form action="/profile/edit/?_method=PUT" method="POST">
-        <div class="form-group">
-          <label for="authEmail">Email</label>
-          <input id="authEmail" class="form-control" type="email" name="email" value="<%= user.email %>"/>
-        </div>
-      
-        <div class="form-group">
-          <label for="firstName">First Name</label>
-          <input id="firstName" class="form-control" type="text" name="firstName" value ="<%= user.firstName || '' %>"/>
-        </div>
-      
-        <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input id="lastName" class="form-control" type="text" name="lastName" value="<%= user.lastName  || '' %> "/>
-        </div>
-      
-        <input class="btn btn-primary" type="submit">
-      </form>    
+  <div class="breadcrumbs">
+    <a class="btn-link" href="/profile">< Profile</a>
+  </div>
+  <h3 class="subheading h-size-1">Edit Profile</h3>
+  <form action="/profile/edit/?_method=PUT" method="POST">
+    <div class="form-group row">
+      <label for="authEmail" class="form-label col-form-label col-2">Email</label>
+      <div class="col-10">
+        <input id="authEmail" class="form-control" type="email" name="email" value="<%= user.email %>"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="firstName" class="form-label col-form-label col-2">First Name</label>
+      <div class="col-10">
+        <input id="firstName" class="form-control" type="text" name="firstName" value ="<%= user.firstName || '' %>"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="lastName" class="form-label col-form-label col-2">Last Name</label>
+      <div class="col-10">
+        <input id="lastName" class="form-control" type="text" name="lastName" value="<%= user.lastName  || '' %> "/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <input class="btn btn-dark" type="submit">
+      </div>
+    </div>
+  </form>    
 </div>

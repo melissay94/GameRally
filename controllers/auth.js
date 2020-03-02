@@ -20,7 +20,7 @@ router.get("/home", loggedIn, (req, res) => {
         if (results.length < 1) {
           res.render("home", { events: [] });
         } else {
-          results = results.sort((a, b) => b.dateTime - a.dateTime);
+          results = results.sort((a, b) => a.dateTime - b.dateTime);
           res.render("home", { events: results });
         }
       }).catch(err => {

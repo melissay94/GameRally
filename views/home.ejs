@@ -7,10 +7,14 @@
     <% } else { %>
         <% events.forEach(event => { %>
             <div class="event-result">
-                <h3><%= event.name %></h3>
+                <div class="row">
+                    <h3 class="col-10"><%= event.name %></h3>
+                    <div class="col-2">
+                        <a class="btn btn-dark" href="/event/<%= event.id %>">See More</a>
+                    </div>
+                </div>
                 <h6><%= event.dateTime %></h6>
                 <p><%= event.description %></p>
-                <a class="btn btn-dark" href="/event/<%= event.id %>">See More</a>
             </div>
         <% }); %>
     <% } %>
