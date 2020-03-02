@@ -27,7 +27,8 @@ router.post("/new", (req, res) => {
         }, defaults: {
             description: req.body.description,
             iconIdentifier: avatarIdentifier,
-            maxPlayers: parseInt(req.body.maxPlayers)
+            maxPlayers: parseInt(req.body.maxPlayers),
+            userId: req.user.id
         }
     }).then(([group, created]) => {
         if (created) {
@@ -81,10 +82,11 @@ router.get("/:id", (req, res) => {
                         });
                     });
                 } else {
+                    console.log(currentUserCount, group.maxPlayers);
                     group.getGames().then(games => {
-                        res.render("group/show", { group: group, events: [], games: games, isMember: false, isFull: currentUserCount <= group.maxPlayers });
+                        res.render("group/show", { group: group, events: [], games: games, isMember: false, isFull: currentUserCount >= group.maxPlayers });
                     }).catch(err => {
-                        res.render("group/show", { group: group, events: [], games: [], isMember: false, isFull: currentUserCount <= group.maxPlayers });
+                        res.render("group/show", { group: group, events: [], games: [], isMember: false, isFull: currentUserCount >= group.maxPlayers });
                     });
                 }
             } else {

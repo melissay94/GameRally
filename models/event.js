@@ -20,10 +20,12 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     location: DataTypes.STRING,
     isVirtual: DataTypes.BOOLEAN,
-    groupId: DataTypes.INTEGER
+    groupId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER
   }, {});
   event.associate = function(models) {
     models.event.belongsTo(models.group);
+    models.event.belongsTo(models.user);
     models.event.belongsToMany(models.game, { through: "gameevents" });
   };
   return event;

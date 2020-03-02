@@ -57,6 +57,8 @@ module.exports = (sequelize, DataTypes) => {
 
   user.associate = function(models) {
     models.user.belongsToMany(models.group, { through: "usergroups" });
+    models.user.hasMany(models.group, { onDelete: "cascade", hooks: true });
+    models.user.hasMany(models.event, { onDelete: "cascade", hooks: true });
   };
 
   user.prototype.validPassword = function(passwordTyped) {

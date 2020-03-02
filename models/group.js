@@ -20,11 +20,13 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Invalid number of players. Need at least 1."
         }
       }
-    }
+    },
+    userId: DataTypes.INTEGER
   }, {});
   group.associate = function(models) {
     models.group.belongsToMany(models.user, { through: "usergroups" });
     models.group.belongsToMany(models.game, { through: "gamegroups" });
+    models.group.belongsTo(models.user);
     models.group.hasMany(models.event, { onDelete: "cascade", hooks: true });
   };
   return group;

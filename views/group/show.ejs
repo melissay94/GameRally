@@ -13,7 +13,9 @@
                 <% if (isMember) { %> 
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">
-                        <a class="btn btn-dark" href="/group/<%= group.id %>/edit">Edit</a>
+                        <% if (group.userId === currentUser.id) { %>
+                            <a class="btn btn-dark" href="/group/<%= group.id %>/edit">Edit</a>
+                        <% } %>
                     </div>
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">
