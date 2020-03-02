@@ -154,7 +154,7 @@ People who want to play board games, but get anxious when trying to meet new peo
 ![User Profile](/readMeImg/userProfile.jpg)
 
 ###### 404 Page
-![404 Page](/readMeImg/404Page.jpg)
+![404 Page](/readMeImg/404page.jpg)
 
 
 
