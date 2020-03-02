@@ -60,7 +60,6 @@ People who want to play board games, but get anxious when trying to meet new peo
   * RSVP for an event
   * Have global events that have no group association
   * Add events to google calendar via the Google Calendar API
-  * Add admin privileges for people who create groups
   * Review games played by group
   * Gamification!! - Just site badges and such
 #### Completed extras:
@@ -70,6 +69,8 @@ People who want to play board games, but get anxious when trying to meet new peo
   * Added Edit pages for groups, events, and profile pages
   * Can delete events and user account
   * Display games played by group in group information
+  * Add confirm password check for users
+  * Add admin privileges for people who create groups
 
 #### Technology being used:
   * [Board Game Atlas API](https://www.boardgameatlas.com/api/docs)
