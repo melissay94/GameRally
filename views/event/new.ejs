@@ -1,6 +1,6 @@
 <div class="breadcrumbs">
-    <a class="a-link" href="/group">< Groups</a>
-    <a class="a-link" href="/group/<%= groupId %>">< <%= group.name %></a>
+    <a class="btn-link" href="/group">< Groups</a>
+    <a class="btn-link" href="/group/<%= groupId %>">< <%= group.name %></a>
 </div>
 <h3 class="subheading h-size-1">New Event</h3>
 <form method="POST" action="/event/new/<%= groupId %>">
@@ -25,7 +25,8 @@
     <div class="form-group row">
         <label for="eventLocation" class="form-label col-form-label col-2">Event Location</label>
         <div class="col-10">
-            <input type="text" class="form-control" id="eventLocation" name="location" />
+            <input type="text" class="form-control" id="eventLocation" name="location" aria-describedby="eventLocationHelp"/>
+            <small id="eventLocationHelp" class="form-text text-muted">GameRally <strong>strongly suggests</strong> that users making events for a group where they haven't all met yet choose to meet in a <strong>public place</strong> versus a private residence. While we sincerely hope and want to believe in our users, we also want our users to remain safe. Thanks!.</small>
         </div>
     </div>
     <div class="form-group row">

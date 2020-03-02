@@ -1,8 +1,16 @@
 
 ![GameRally Logo](public/img/GameRallyLogo.png)
 # 
-
 Templated from [Express Authentication Project](https://github.com/melissay94/express-authentication)
+
+## Setting up Project
+
+* Run `npm install` to install dependencies
+  * Use `npm test` to run tests
+* Setup the databases
+  * Run `createdb gamerally_dev` to create the development database
+  * Run `createdb gamerally_test` to create the test database
+  * Run `sequelize db:migrate` to run migrations
 
 ## Initial Project Plan
 
@@ -68,15 +76,16 @@ People who want to play board games, but get anxious when trying to meet new peo
   * [DiceBear Avatars API](https://avatars.dicebear.com/)
   * JavaScript, HTML, CSS
   * Bootstrap
+  * [Teko Font from Google](https://fonts.google.com/specimen/Teko)
   * EJS
   * Express
   * Sequelize
   * Postgres
 
-#### Site Map
-![Site Map](/readMeImg/siteMap.png)
+#### ERDiagram
+![ERDiagram](/readMeImg/gameRallyERDiagram.png)
 
-## Routes
+#### Routes
 | Method  | Route   | Behavior                   |
 |---------|---------|--------------------------- |
 | GET     | /       | Render landing page        |
@@ -105,8 +114,8 @@ People who want to play board games, but get anxious when trying to meet new peo
 | GET     | /profile/edit | Renders page with form to update user information |
 | PUT     | /profile/edit | Updates user information and redirects to `/profile` on success |
 
-#### ERDiagram
-![ERDiagram](/readMeImg/gameRallyERDiagram.png)
+#### Site Map
+![Site Map](/readMeImg/siteMap.png)
 
 #### Issues and Bugs
 * The breadcrumbs at the top are statically defined and not actually defined by the path you game from. I'd like to update that to be more helpful
@@ -155,14 +164,3 @@ People who want to play board games, but get anxious when trying to meet new peo
 
 ###### 404 Page
 ![404 Page](/readMeImg/404Page.jpg)
-
-
-
-## Setting up Project
-
-* Run `npm install` to install dependencies
-  * Use `npm test` to run tests
-* Setup the databases
-  * Run `createdb gamerally_dev` to create the development database
-  * Run `createdb gamerally_test` to create the test database
-  * Run `sequelize db:migrate` to run migrations
