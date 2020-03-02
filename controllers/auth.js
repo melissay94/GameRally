@@ -38,26 +38,31 @@ router.get("/home", loggedIn, (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  db.user.findOrCreate({
-    where: {
-      email:req.body.email
-    }, defaults: {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      password: req.body.password
-    }
-  }).then(([user, created]) => {
-    if (created) {
-      passport.authenticate("local", {
-        successRedirect: "/home"
-      })(req, res);
-    } else {
-      req.flash("error", "Email is already in use");
-      res.redirect("/");
-    }
-  }).catch(err => {
-    res.status(400).render("404");
-  })
+  if (req.body.password === req.body.confirm) {
+    db.user.findOrCreate({
+      where: {
+        email:req.body.email
+      }, defaults: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        password: req.body.password
+      }
+    }).then(([user, created]) => {
+      if (created) {
+        passport.authenticate("local", {
+          successRedirect: "/home"
+        })(req, res);
+      } else {
+        req.flash("error", "Email is already in use");
+        res.redirect("/");
+      }
+    }).catch(err => {
+      res.status(400).render("404");
+    });
+  } else {
+    req.flash("Passwords do not match");
+    res.redirect("/");
+  }
 });
 
 router.post("/login", passport.authenticate("local", {
