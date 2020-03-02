@@ -3,6 +3,9 @@
 # 
 Templated from [Express Authentication Project](https://github.com/melissay94/express-authentication)
 
+## Hosted on GitHub
+[GameRally Site](https://gamerallyio.herokuapp.com/)
+
 ## Setting up Project
 
 * Run `npm install` to install dependencies
