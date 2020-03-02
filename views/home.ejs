@@ -1,20 +1,25 @@
 <div class="container-fluid">
-    <h3 class="subheading">Your Upcoming Events</h3>
+    <h3 class="subheading h-size-1">Your Upcoming Events</h3>
     <% if (events.length < 1) { %>
         <div class="alert">
             You have no upcoming events
         </div>
     <% } else { %>
-        <% events.forEach(event => { %>
-            <div class="event-result">
-                <div class="row">
-                    <h3 class="col-10"><%= event.name %></h3>
-                    <div class="col-2">
-                        <a class="btn btn-dark" href="/event/<%= event.id %>">See More</a>
+        <% events.forEach((event, index) => { %>
+            <div class="row game-result">
+                <a class="col-2" href="/group/<%= event.groupId %>">
+                    <img src="https://avatars.dicebear.com/v2/jdenticon/<%= groupIdentifiers[event.groupId-1] %>.svg" alt="group icon">
+                </a>
+                <div class="event-result col-10">
+                    <div class="row">
+                        <h3 class="col-md-10"><%= event.name %></h3>
+                        <div class="col-md-2">
+                            <a class="btn btn-dark" href="/event/<%= event.id %>">See More</a>
+                        </div>
                     </div>
+                    <h6><%= event.dateTime %></h6>
+                    <p><%= event.description %></p>
                 </div>
-                <h6><%= event.dateTime %></h6>
-                <p><%= event.description %></p>
             </div>
         <% }); %>
     <% } %>

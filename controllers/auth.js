@@ -11,6 +11,9 @@ router.get("/home", loggedIn, (req, res) => {
     where: { id: req.user.id }
   }).then(user => {
     user.getGroups().then(groups => {
+      let groupImages = groups.map(group => {
+        return group.iconIdentifier;
+      });
       let eventArray = [];
       groups.forEach(group => {
         eventArray.push(group.getEvents());
@@ -21,10 +24,10 @@ router.get("/home", loggedIn, (req, res) => {
           res.render("home", { events: [] });
         } else {
           results = results.sort((a, b) => a.dateTime - b.dateTime);
-          res.render("home", { events: results });
+          res.render("home", { events: results, groupIdentifiers: groupImages });
         }
       }).catch(err => {
-        res.render("home", { events: [] });
+        res.render("home", { events: [], groupIdentifiers: [] });
       });
     }).catch(err => {
       res.status(400).render("404");
