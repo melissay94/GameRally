@@ -20,7 +20,7 @@
     <div class="form-group row">
         <label for="groupMax" class="form-label col-form-label col-2">Max Players</label>
         <div class="col-10">
-            <input type="number" min="1" class="form-control" id="groupMax" name="maxPlayers" aria-describedby="groupMaxHelp" value="<%= group.maxPlayers %>"/>
+            <input type="number" min="1" class="form-control" id="groupMax" name="maxPlayers" aria-describedby="groupMaxHelp" value="<%= group.maxPlayers %>" min="<%= group.maxPlayers %>" />
             <small id="groupMaxHelp" class="form-text text-muted">This will be how many people can join the group before it closes.</small>
         </div>
     </div>
