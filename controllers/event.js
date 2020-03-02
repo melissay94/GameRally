@@ -27,7 +27,8 @@ router.post("/new/:groupId", (req, res) => {
             description: req.body.description,
             location: req.body.location,
             isVirtual: req.body.isVirtual,
-            groupId: req.params.groupId
+            groupId: req.params.groupId,
+            userId: req.user.id
         }).then(event => {
             res.redirect(`/games/${event.get().id}`);
         }).catch(err => {
