@@ -5,28 +5,28 @@
 <h3 class="subheading h-size-1">Edit <%= group.name %></h3>
 <form method="POST" action="/group/<%= group.id %>/edit/?_method=PUT">
     <div class="form-group row">
-        <label for="groupName" class="form-label col-form-label col-2">Group Name</label>
-        <div class="col-10">
+        <label for="groupName" class="form-label col-form-label col-md-2">Group Name</label>
+        <div class="col-md-10">
             <input type="text" class="form-control" id="groupName" aria-describedby="groupNameHelp" name="name" value="<%= group.name %>"/>
             <small id="groupNameHelp" class="form-text text-muted">Your Group Name has to be unique from other existing groups.</small>
         </div>
     </div>
     <div class="form-group row">
-        <label for="groupDescription" class="form-label col-form-label col-2">Group Description</label>
-        <div class="col-10">
+        <label for="groupDescription" class="form-label col-form-label col-md-2">Group Description</label>
+        <div class="col-md-10">
             <textarea class="form-control" id="groupDescription" rows="5" name="description"><%= group.description %></textarea>
         </div>
     </div>
     <div class="form-group row">
-        <label for="groupMax" class="form-label col-form-label col-2">Max Players</label>
-        <div class="col-10">
+        <label for="groupMax" class="form-label col-form-label col-md-2">Max Players</label>
+        <div class="col-md-10">
             <input type="number" min="1" class="form-control" id="groupMax" name="maxPlayers" aria-describedby="groupMaxHelp" value="<%= group.maxPlayers %>" min="<%= group.maxPlayers %>" />
             <small id="groupMaxHelp" class="form-text text-muted">This will be how many people can join the group before it closes.</small>
         </div>
     </div>
     <div class="row">
-        <div class="col-10"></div>
-        <div class="col-2">
+        <div class="col-md-10"></div>
+        <div class="col-md-2 form-submit">
             <button type="submit" class="btn btn-dark">Update Group</button>
         </div>
     </div>
