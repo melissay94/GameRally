@@ -46,7 +46,7 @@ p {
 }
 
 .btn-dark {
-    width: 100%;
+    width: 85%;
     background-color: #4F6D7A;
     border-color: #4F6D7A;
     color: #fefefe;
@@ -179,6 +179,10 @@ p {
     margin: 24px 0;
 }
 
+.group-description {
+    padding-left: 15px;
+}
+
 .group-info {
     display: flex;
     justify-content: space-between;
@@ -238,6 +242,24 @@ p {
 
     .login-link {
         padding-left: 0;
+    }
+
+    .group-list {
+        text-align: center;
+    }
+
+    .group-icon {
+        width: 150px;
+    }
+
+    .group-summary {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .group-summary p {
+        text-align: center;
+        width: 100%;
     }
 }
 
