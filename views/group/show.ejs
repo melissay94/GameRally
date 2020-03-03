@@ -1,62 +1,62 @@
 <div class="container-fluid">
     <a class="btn-link" href="/group">< Groups</a>
-    <div class="group-info">
-        <div class="col-2">
-            <img src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
+    <div class="group-info group-list">
+        <div class="col-md-2">
+            <img class="img-fluid group-icon" src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
         </div>
-        <div class="col-1"></div>
-        <div class="col-9">
+        <div class="col-md-1"></div>
+        <div class="col-md-9">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-lg-6">
                     <h3 class="subheading h-size-1"><%= group.name %></h3>
                 </div>
                 <% if (isMember) { %> 
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-2">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2 event-btn">
                         <% if (group.userId === currentUser.id) { %>
                             <a class="btn btn-dark" href="/group/<%= group.id %>/edit">Edit</a>
                         <% } %>
                     </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-2">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2 event-btn">
                         <form method="POST" action="/group/<%= group.id %>/?_method=DELETE">
                             <button type="submit" class="btn btn-dark">Leave</button>
                         </form>
                     </div>
                 <% } else if (!isFull) { %>
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-2">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-2 event-btn">
                         <form action="/group/<%= group.id %>/?_method=PUT" method="POST">
                             <button class="btn btn-dark" type="submit">Join</button>
                         </form>
                     </div>
                 <% } else { %>
-                    <div class="col-sm-4"></div>
-                    <h3 class="col-sm-2 subheading h-size-2">Full</h3>
+                    <div class="col-lg-4"></div>
+                    <h3 class="col-lg-2 subheading h-size-2">Full</h3>
                 <% } %>
             </div>
             <p><%= group.description %></p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-3 group-games">
+    <div class="row group-list">
+        <div class="col-md-3 group-games">
             <h3 class="subheading h-size-2">Games Played</h3>
             <% games.forEach(game => { %>
                 <h6><%= game.name %></h6>
             <% }); %>
         </div>
-        <div class="col-9">
+        <div class="col-md-9">
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-lg-9">
                     <h3 class="subheading h-size-2">Upcoming Events</h3>
                 </div>
                 <% if (isMember) { %> 
-                <div class="col-sm-3">
+                <div class="col-lg-3 event-btn">
                         <a href="/event/new/<%= group.id %>" class="btn btn-dark">New Event</a>
                 </div>
                 <% } else { %> 
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-2">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
                         <h3 class="subheading h-size-2">Locked</h3>
                     </div>
                 <% } %>
@@ -67,8 +67,8 @@
             <% events.forEach(event => { %>
                 <div class="event-result">
                     <div class="row">
-                        <h3 class="col-10"><%= event.name %></h3>
-                        <div class="col-2">
+                        <h3 class="col-md-10"><%= event.name %></h3>
+                        <div class="col-md-2 event-btn">
                             <a class="btn btn-dark" href="/event/<%= event.id %>">See More</a>
                         </div>
                     </div>

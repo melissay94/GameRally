@@ -184,8 +184,6 @@ p {
 }
 
 .group-info {
-    display: flex;
-    justify-content: space-between;
     margin: 24px 0;
 }
 
@@ -278,6 +276,10 @@ p {
         flex: 0 0 50%;
         max-width: 50%;
         margin-bottom: 12px;
+    }
+
+    .group-games h3, .group-games h6 {
+        margin-left: 0;
     }
 
     .form-submit {
