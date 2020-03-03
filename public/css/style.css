@@ -244,12 +244,24 @@ p {
         padding-left: 0;
     }
 
-    .group-list {
+    .group-list, .event-list {
         text-align: center;
     }
 
     .group-icon {
         width: 150px;
+    }
+
+    .event-list img {
+        margin: 0 auto;
+    }
+
+    .event-result h6 {
+        margin-top: 12px;
+    }
+
+    .event-btn {
+        margin: 12px 0;
     }
 
     .group-summary {
@@ -260,6 +272,12 @@ p {
     .group-summary p {
         text-align: center;
         width: 100%;
+    }
+
+    .game-result .col-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        margin-bottom: 12px;
     }
 }
 
