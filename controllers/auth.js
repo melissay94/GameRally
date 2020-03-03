@@ -8,7 +8,8 @@ const router = express.Router();
 // Render logged in home page here
 router.get("/home", loggedIn, (req, res) => {
   db.user.findOne({
-    where: { id: req.user.id }
+    where: { id: req.user.id },
+    include: [db.group]
   }).then(user => {
     user.getGroups().then(groups => {
       let groupImages = groups.map(group => {
@@ -16,15 +17,21 @@ router.get("/home", loggedIn, (req, res) => {
       });
       let eventArray = [];
       groups.forEach(group => {
-        eventArray.push(group.getEvents);
+        eventArray.push(group.getEvents());
       });
       Promise.all(eventArray).then(values => {
-        let results= values[0];
-        if (results.length < 1) {
+        let results = values;
+        let resultObjs = [];
+        results.forEach(result => {
+          result.forEach(event => {
+            resultObjs.push(event);
+          });
+        });
+        if (resultObjs.length < 1) {
           res.render("home", { events: [] });
         } else {
-          results = results.sort((a, b) => a.dateTime - b.dateTime);
-          res.render("home", { events: results, groupIdentifiers: groupImages });
+          results = resultObjs.sort((a, b) => a.dateTime - b.dateTime);
+          res.render("home", { events: resultObjs, groupIdentifiers: groupImages });
         }
       }).catch(err => {
         res.render("home", { events: [], groupIdentifiers: [] });
