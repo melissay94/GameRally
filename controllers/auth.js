@@ -16,7 +16,7 @@ router.get("/home", loggedIn, (req, res) => {
       });
       let eventArray = [];
       groups.forEach(group => {
-        eventArray.push(group.getEvents());
+        eventArray.push(group.getEvents);
       });
       Promise.all(eventArray).then(values => {
         let results= values[0];
@@ -57,7 +57,8 @@ router.post("/signup", (req, res) => {
         res.redirect("/");
       }
     }).catch(err => {
-      res.status(400).render("404");
+      req.flash("error", err.message);
+      res.redirect("/");
     });
   } else {
     req.flash("Passwords do not match");
