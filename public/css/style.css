@@ -230,3 +230,19 @@ p {
 .footer-link:hover {
     color: #084C61;
 }
+
+@media only screen and (max-width: 768px) {
+    .landing-page-heading {
+        margin-top: 24px;
+    }
+
+    .login-link {
+        padding-left: 0;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .footer {
+        flex-direction: column;
+    }
+}
