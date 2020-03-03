@@ -46,7 +46,7 @@ p {
 }
 
 .btn-dark {
-    width: 100%;
+    width: 85%;
     background-color: #4F6D7A;
     border-color: #4F6D7A;
     color: #fefefe;
@@ -179,9 +179,11 @@ p {
     margin: 24px 0;
 }
 
+.group-description {
+    padding-left: 15px;
+}
+
 .group-info {
-    display: flex;
-    justify-content: space-between;
     margin: 24px 0;
 }
 
@@ -229,4 +231,81 @@ p {
 
 .footer-link:hover {
     color: #084C61;
+}
+
+@media only screen and (max-width: 992px) {
+    .profile-header .col-md-2 {
+        max-width: 45%;
+        flex: 0 0 45%;
+        padding: 0;
+    }
+
+    .profile-header h3 {
+        padding: 0;
+    }
+
+    .event-result h6 {
+        margin-top: 12px;
+    }
+
+    .event-btn {
+        margin: 12px 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .landing-page-heading {
+        margin-top: 24px;
+    }
+
+    .login-link {
+        padding-left: 0;
+    }
+
+    .group-list, .event-list, .query-result, .group-info, .group-details {
+        text-align: center;
+    }
+
+    .group-icon {
+        width: 150px;
+    }
+
+    .event-list img {
+        margin: 0 auto;
+    }
+
+    .group-summary {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .group-summary p {
+        text-align: center;
+        width: 100%;
+    }
+
+    .game-result .col-4, .play-info .col-md-2 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        margin-bottom: 12px;
+    }
+
+    .group-games h3, .group-games h6 {
+        margin-left: 0;
+    }
+
+    .form-submit {
+        text-align: center;
+    }
+
+    .profile-header .col-md-2 {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .footer {
+        flex-direction: column;
+    }
 }

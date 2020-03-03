@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid event-list">
     <h3 class="subheading h-size-1">Your Upcoming Events</h3>
     <% if (events.length < 1) { %>
         <div class="alert">
@@ -7,10 +7,10 @@
     <% } else { %>
         <% events.forEach((event, index) => { %>
             <div class="row game-result">
-                <a class="col-2" href="/group/<%= event.groupId %>">
-                    <img src="https://avatars.dicebear.com/v2/jdenticon/<%= groupIdentifiers[event.groupId-1] %>.svg" alt="group icon">
+                <a class="col-md-2" href="/group/<%= event.groupId %>">
+                    <img class="group-icon" src="https://avatars.dicebear.com/v2/jdenticon/<%= groupIdentifiers[event.groupId-1] %>.svg" alt="group icon">
                 </a>
-                <div class="event-result col-10">
+                <div class="event-result col-md-10">
                     <div class="row">
                         <h3 class="col-md-10"><%= event.name %></h3>
                         <div class="col-md-2">

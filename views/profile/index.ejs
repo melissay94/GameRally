@@ -1,12 +1,12 @@
-<div class="container-fluid">
-    <div class="row">
-        <h3 class="subheading h-size-1 col-6">Your Profile</h3>
-        <div class="col-1"></div>
-        <div class="col-2">
+<div class="container-fluid group-list">
+    <div class="row profile-header">
+        <h3 class="subheading h-size-1 col-md-6">Your Profile</h3>
+        <div class="col-md-1"></div>
+        <div class="col-md-2 event-btn">
             <a href="/profile/edit" class="btn btn-dark">Edit Account</a>
         </div>
-        <div class="col-1"></div>
-        <div class="col-2">
+        <div class="col-md-1"></div>
+        <div class="col-md-2 event-btn">
             <form method="POST" action="/profile/?_method=DELETE">
                 <button type="submit" class="btn btn-dark">Delete Account</button>
             </form>
@@ -17,7 +17,7 @@
     <h3>Member since <%= user.createdAt %></h3>
     <h3 class="subheading h-size-2 group-result">Current Groups</h3>
     <% groups.forEach(group => { %>
-        <a class="btn-link" href="/group/<%= group.id %>">
+        <a class="btn-link form-submit" href="/group/<%= group.id %>">
             <h4><%= group.name %></h4>
         </a>
     <% }); %>
