@@ -38,8 +38,8 @@
                 <h6 class="text-muted">Published by <%= game.primary_publisher %></h6>
                 <p><%= game.description_preview %></p>
                 <div class="row">
-                    <h6 class="col-4">Players: <%= game.min_players %> - <%= game.max_players %></h6>
-                    <h6 class="col-4">Playtime: <%= game.min_playtime %> - <%= game.max_playtime %></h6>
+                    <h6 class="col-4 play-info">Players: <%= game.min_players %> - <%= game.max_players %></h6>
+                    <h6 class="col-4 play-info">Playtime: <%= game.min_playtime %> - <%= game.max_playtime %></h6>
                     <div class="col-1"></div>
                     <div class="col-md-3">
                         <% if (currentUser.id === event.userId) { %>

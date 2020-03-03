@@ -244,7 +244,7 @@ p {
         padding-left: 0;
     }
 
-    .group-list, .event-list {
+    .group-list, .event-list, .query-result {
         text-align: center;
     }
 
@@ -274,7 +274,7 @@ p {
         width: 100%;
     }
 
-    .game-result .col-4 {
+    .game-result .col-4, .play-info .col-md-2 {
         flex: 0 0 50%;
         max-width: 50%;
         margin-bottom: 12px;
