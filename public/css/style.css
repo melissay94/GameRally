@@ -243,6 +243,14 @@ p {
     .profile-header h3 {
         padding: 0;
     }
+
+    .event-result h6 {
+        margin-top: 12px;
+    }
+
+    .event-btn {
+        margin: 12px 0;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -254,7 +262,7 @@ p {
         padding-left: 0;
     }
 
-    .group-list, .event-list, .query-result {
+    .group-list, .event-list, .query-result, .group-info, .group-details {
         text-align: center;
     }
 
@@ -264,14 +272,6 @@ p {
 
     .event-list img {
         margin: 0 auto;
-    }
-
-    .event-result h6 {
-        margin-top: 12px;
-    }
-
-    .event-btn {
-        margin: 12px 0;
     }
 
     .group-summary {

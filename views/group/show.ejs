@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <a class="btn-link" href="/group">< Groups</a>
-    <div class="group-info group-list">
+    <div class="group-info row">
         <div class="col-md-2">
             <img class="img-fluid group-icon" src="https://avatars.dicebear.com/v2/jdenticon/<%=group.iconIdentifier%>.svg" alt="Group Icon" />
         </div>
@@ -35,10 +35,12 @@
                     <h3 class="col-lg-2 subheading h-size-2">Full</h3>
                 <% } %>
             </div>
-            <p><%= group.description %></p>
+            <div class="row">
+                <p class="col-12"><%= group.description %></p>
+            </div>
         </div>
     </div>
-    <div class="row group-list">
+    <div class="row group-details">
         <div class="col-md-3 group-games">
             <h3 class="subheading h-size-2">Games Played</h3>
             <% games.forEach(game => { %>
@@ -67,8 +69,8 @@
             <% events.forEach(event => { %>
                 <div class="event-result">
                     <div class="row">
-                        <h3 class="col-md-10"><%= event.name %></h3>
-                        <div class="col-md-2 event-btn">
+                        <h3 class="col-lg-10"><%= event.name %></h3>
+                        <div class="col-lg-2 event-btn">
                             <a class="btn btn-dark" href="/event/<%= event.id %>">See More</a>
                         </div>
                     </div>
