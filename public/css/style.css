@@ -233,6 +233,18 @@ p {
     color: #084C61;
 }
 
+@media only screen and (max-width: 992px) {
+    .profile-header .col-md-2 {
+        max-width: 45%;
+        flex: 0 0 45%;
+        padding: 0;
+    }
+
+    .profile-header h3 {
+        padding: 0;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .landing-page-heading {
         margin-top: 24px;
@@ -284,6 +296,11 @@ p {
 
     .form-submit {
         text-align: center;
+    }
+
+    .profile-header .col-md-2 {
+        max-width: 100%;
+        flex: 0 0 100%;
     }
 }
 
