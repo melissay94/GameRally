@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const axios = require("axios");
+const moment = require("moment");
 const db = require("../models");
 
 const router = express.Router();
@@ -11,6 +12,7 @@ router.get("/new/:groupId", (req, res) => {
     db.group.findOne({
         where: { id: req.params.groupId }
     }).then(group => {
+        eventMin = moment().format("YYYY-MM-DDTkk:mm");
         res.render("event/new", { groupId: req.params.groupId, group: group });
     }).catch(err => {
         res.status(400).render("404");
@@ -45,6 +47,7 @@ router.get("/:id", (req, res) => {
         where: { id: req.params.id },
         include: 'group'
     }).then(event => {
+        event.dateTimeStr = moment(event.dateTime).format("llll");
         event.getGames().then(games => {
             let gameIdArray = [];
             games.forEach(game => gameIdArray.push(game.link));
@@ -102,6 +105,8 @@ router.get("/:id/edit", (req, res) => {
         where: { id: req.params.id }, 
         include: 'group'
     }).then(event => {
+        event.dateTimeMin = moment().format("YYYY-MM-DDTkk:mm");
+        event.dateTimeStr = moment(event.dateTime).format("YYYY-MM-DDTkk:mm:ss");
         res.render("event/edit", { event: event, group: event.group });
     }).catch(err => {
         res.status(400).render("404");

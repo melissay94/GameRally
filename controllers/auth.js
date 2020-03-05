@@ -1,4 +1,5 @@
 const express = require('express');
+const moment = require('moment');
 const passport = require("../config/ppConfig");
 const loggedIn = require("../middleware/isLoggedIn");
 const db = require("../models");
@@ -24,14 +25,18 @@ router.get("/home", loggedIn, (req, res) => {
         let resultObjs = [];
         results.forEach(result => {
           result.forEach(event => {
+            event.dateTimeStr = moment(event.dateTime).format("llll");
             resultObjs.push(event);
           });
         });
         if (resultObjs.length < 1) {
           res.render("home", { events: [] });
         } else {
-          results = resultObjs.sort((a, b) => a.dateTime - b.dateTime);
-          res.render("home", { events: resultObjs, groupIdentifiers: groupImages });
+          results = resultObjs.filter(event => {
+            return moment().isBefore(event.dateTimeStr);
+          });
+          results = results.sort((a, b) => a.dateTime - b.dateTime);
+          res.render("home", { events: results, groupIdentifiers: groupImages });
         }
       }).catch(err => {
         res.render("home", { events: [], groupIdentifiers: [] });
