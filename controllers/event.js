@@ -12,6 +12,7 @@ router.get("/new/:groupId", (req, res) => {
     db.group.findOne({
         where: { id: req.params.groupId }
     }).then(group => {
+        eventMin = moment().format("YYYY-MM-DDTkk:mm:ss");
         res.render("event/new", { groupId: req.params.groupId, group: group });
     }).catch(err => {
         res.status(400).render("404");
@@ -104,6 +105,8 @@ router.get("/:id/edit", (req, res) => {
         where: { id: req.params.id }, 
         include: 'group'
     }).then(event => {
+        event.dateTimeMin = moment().format("YYYY-MM-DDTkk:mm:ss");
+        event.dateTimeStr = moment(event.dateTime).format("YYYY-MM-DDTkk:mm:ss");
         res.render("event/edit", { event: event, group: event.group });
     }).catch(err => {
         res.status(400).render("404");
