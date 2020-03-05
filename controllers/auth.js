@@ -32,8 +32,11 @@ router.get("/home", loggedIn, (req, res) => {
         if (resultObjs.length < 1) {
           res.render("home", { events: [] });
         } else {
-          results = resultObjs.sort((a, b) => a.dateTime - b.dateTime);
-          res.render("home", { events: resultObjs, groupIdentifiers: groupImages });
+          results = resultObjs.filter(event => {
+            return moment().isBefore(event.dateTimeStr);
+          });
+          results = results.sort((a, b) => a.dateTime - b.dateTime);
+          res.render("home", { events: results, groupIdentifiers: groupImages });
         }
       }).catch(err => {
         res.render("home", { events: [], groupIdentifiers: [] });
