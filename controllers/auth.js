@@ -1,4 +1,5 @@
 const express = require('express');
+const moment = require('moment');
 const passport = require("../config/ppConfig");
 const loggedIn = require("../middleware/isLoggedIn");
 const db = require("../models");
@@ -24,6 +25,7 @@ router.get("/home", loggedIn, (req, res) => {
         let resultObjs = [];
         results.forEach(result => {
           result.forEach(event => {
+            event.dateTimeStr = moment(event.dateTime).format("llll");
             resultObjs.push(event);
           });
         });

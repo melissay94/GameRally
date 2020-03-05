@@ -1,5 +1,5 @@
 const express = require('express');
-const axios = require("axios");
+const moment = require('moment');
 const db = require("../models");
 
 const router = express.Router();
@@ -69,6 +69,9 @@ router.get("/:id", (req, res) => {
             if (group) {
                 if (user.length > 0) {
                     group.getEvents().then(events => {
+                        events.forEach(event => {
+                            event.dateTimeStr = moment(event.dateTime).format("llll");
+                        })
                         group.getGames().then(games => {
                             res.render("group/show", { group: group, events: events, games: games, isMember: true });
                         }).catch(err => {

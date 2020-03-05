@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const axios = require("axios");
+const moment = require("moment");
 const db = require("../models");
 
 const router = express.Router();
@@ -45,6 +46,7 @@ router.get("/:id", (req, res) => {
         where: { id: req.params.id },
         include: 'group'
     }).then(event => {
+        event.dateTimeStr = moment(event.dateTime).format("llll");
         event.getGames().then(games => {
             let gameIdArray = [];
             games.forEach(game => gameIdArray.push(game.link));
