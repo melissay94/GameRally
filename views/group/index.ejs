@@ -8,7 +8,10 @@
         </div>
     </div>
     <% if (groups.length < 1) { %> 
-        <div class="alert">No groups were found</div>
+        <div class="alert">
+            <h3>There are currently no groups</h3>
+            <p>Why not create a <a href="/group/new" class="btn-link">new group</a>?</p>
+        </div>
     <% } %>
     <% groups.forEach(group => { %>
         <div class="row">

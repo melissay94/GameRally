@@ -64,7 +64,10 @@
                 <% } %>
             </div>
             <% if (events.length < 1 && isMember) { %> 
-                <div class="alert red">No upcoming events</div>
+                <div class="alert">
+                    <h3>No Upcoming Events</h3>
+                    <p>Why not create a <a href="/event/new/<%= group.id %>" class="btn-link">New Event</a>?</p>
+                </div>
             <% } %>
             <% events.forEach(event => { %>
                 <div class="event-result">
