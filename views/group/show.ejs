@@ -24,7 +24,10 @@
                         </form>
                     </div>
                 <% } else if (!isFull) { %>
-                    <div class="col-lg-4"></div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                        <h3 class="subheading h-size-2"><%= group.maxPlayers - currentUserCount %> Spots Left</h3>
+                    </div>
                     <div class="col-lg-2 event-btn">
                         <form action="/group/<%= group.id %>/?_method=PUT" method="POST">
                             <button class="btn btn-dark" type="submit">Join</button>
@@ -36,7 +39,10 @@
                 <% } %>
             </div>
             <div class="row">
-                <p class="col-12"><%= group.description %></p>
+                <div class="col-12">
+                    <p>Current Member Count: <%= currentUserCount %></p>
+                    <p><%= group.description %></p>
+                </div>
             </div>
         </div>
     </div>
