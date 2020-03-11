@@ -24,7 +24,10 @@
                         </form>
                     </div>
                 <% } else if (!isFull) { %>
-                    <div class="col-lg-4"></div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                        <h3 class="subheading h-size-2"><%= group.maxPlayers - currentUserCount %> Spots Left</h3>
+                    </div>
                     <div class="col-lg-2 event-btn">
                         <form action="/group/<%= group.id %>/?_method=PUT" method="POST">
                             <button class="btn btn-dark" type="submit">Join</button>
@@ -36,7 +39,13 @@
                 <% } %>
             </div>
             <div class="row">
-                <p class="col-12"><%= group.description %></p>
+                <div class="col-12">
+                    <div class="row">
+                        <p class="col-lg-3">Current Member Count: <%= currentUserCount %></p>
+                        <p class="col-lg-3">Max Member Count: <%= group.maxPlayers %></p>
+                    </div>
+                    <p><%= group.description %></p>
+                </div>
             </div>
         </div>
     </div>
@@ -64,7 +73,10 @@
                 <% } %>
             </div>
             <% if (events.length < 1 && isMember) { %> 
-                <div class="alert red">No upcoming events</div>
+                <div class="alert">
+                    <h3>No Upcoming Events</h3>
+                    <p>Why not create a <a href="/event/new/<%= group.id %>" class="btn-link">New Event</a>?</p>
+                </div>
             <% } %>
             <% events.forEach(event => { %>
                 <div class="event-result">

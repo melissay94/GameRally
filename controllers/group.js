@@ -76,23 +76,22 @@ router.get("/:id", (req, res) => {
                             return moment().isBefore(event.dateTimeStr);
                         })
                         group.getGames().then(games => {
-                            res.render("group/show", { group: group, events: filteredEvents, games: games, isMember: true });
+                            res.render("group/show", { group: group, events: filteredEvents, games: games, isMember: true, currentUserCount: currentUserCount });
                         }).catch(err => {
-                            res.render("group/show", { group: group, events: filteredEvents, games: [], isMember: true });
+                            res.render("group/show", { group: group, events: filteredEvents, games: [], isMember: true, currentUserCount: currentUserCount });
                         });
                     }).catch(err => {
                         group.getGames().then(games => {
-                            res.render("group/show", { group: group, events: [], games: games, isMember: true });
+                            res.render("group/show", { group: group, events: [], games: games, isMember: true, currentUserCount: currentUserCount });
                         }).catch(err => {
-                            res.render("group/show", { group: group, events: [], games: [], isMember: true });
+                            res.render("group/show", { group: group, events: [], games: [], isMember: true, currentUserCount: currentUserCount });
                         });
                     });
                 } else {
-                    console.log(currentUserCount, group.maxPlayers);
                     group.getGames().then(games => {
-                        res.render("group/show", { group: group, events: [], games: games, isMember: false, isFull: currentUserCount >= group.maxPlayers });
+                        res.render("group/show", { group: group, events: [], games: games, isMember: false, isFull: currentUserCount >= group.maxPlayers, currentUserCount: currentUserCount });
                     }).catch(err => {
-                        res.render("group/show", { group: group, events: [], games: [], isMember: false, isFull: currentUserCount >= group.maxPlayers });
+                        res.render("group/show", { group: group, events: [], games: [], isMember: false, isFull: currentUserCount >= group.maxPlayers, currentUserCount: currentUserCount });
                     });
                 }
             } else {

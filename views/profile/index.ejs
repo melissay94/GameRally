@@ -15,7 +15,13 @@
     <h3>Email: <%= user.email %></h3>
     <h3>Name: <%= user.firstName %> <%= user.lastName %></h3>
     <h3>Member since <%= user.createdAt %></h3>
-    <h3 class="subheading h-size-2 group-result">Current Groups</h3>
+    <h3 class="subheading h-size-2 group-result" id="current-groups">Current Groups</h3>
+    <% if (groups.length < 1) { %>
+        <div class="alert">
+            <h3>You aren't a member of any groups yet!</h3>
+            <p>Why not visit the <a href="/group" class="btn-link">groups list</a> to find a new group?</p>
+        </div>
+    <% } %>
     <% groups.forEach(group => { %>
         <a class="btn-link form-submit" href="/group/<%= group.id %>">
             <h4><%= group.name %></h4>

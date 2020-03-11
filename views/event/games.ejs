@@ -20,6 +20,11 @@
     </div>
 </form>
 <div class="query-result">
+    <% if (games.length < 1) { %>
+        <div class="alert">
+            <h3>No Games Found</h3>
+        </div>
+    <% } %>
     <% games.forEach(game => {%> 
         <div class="row">
             <div class="col-md-2">
