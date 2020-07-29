@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       validate: {
-        len: {
-          args: [1, 60],
+        min: {
+          args: [1],
           msg: "Invalid length. Must be between 1 and 60 characters."
         }
       }
@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     link: {
       type: DataTypes.STRING,
       validate: {
-        len: {
-          args: [1, 60],
+        min: {
+          args: [1],
           msg: "Invalid length. Must be between 1 and 60 characters."
         }
       }

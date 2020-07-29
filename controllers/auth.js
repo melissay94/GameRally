@@ -42,10 +42,12 @@ router.get("/home", loggedIn, (req, res) => {
         res.render("home", { events: [], groupIdentifiers: [] });
       });
     }).catch(err => {
-      res.status(400).render("404");
+      req.flash("error", err.message);
+      res.redirect("/");
     });
   }).catch(err => {
-    res.status(400).render("404");
+    req.flash("error", err.message);
+    res.redirect("/");
   });
 });
 

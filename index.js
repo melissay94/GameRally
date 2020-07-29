@@ -54,7 +54,11 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index');
+  if (!res.locals.currentUser) {
+    res.render('index');
+  } else {
+    res.redirect('/home');
+  }
 });
 
 app.use("/", authController);

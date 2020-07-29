@@ -1,5 +1,5 @@
 {
-  "name": "express-authentication",
+  "name": "gamerally",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,12 @@
     "test": "NODE_ENV=test node_modules/mocha/bin/mocha"
   },
   "license": "ISC",
+  "homepage": "https://gamerallyio.herokuapp.com/",
+  "author": {
+    "name": "Melissa Young",
+    "url": "https://www.melissayoung.dev"
+  },
+  "repository": "github:melissay94/GameRally.git",
   "devDependencies": {
     "babel-eslint": "^6.0.4",
     "chai": "^4.2.0",

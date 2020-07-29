@@ -6,7 +6,7 @@ const db = require("../models");
 
 const router = express.Router();
 
-const gameAtlasURL = "https://www.boardgameatlas.com/api/search?";
+const gameAtlasURL = "https://api.boardgameatlas.com/api/search?";
 
 router.get("/new/:groupId", (req, res) => {
     db.group.findOne({
